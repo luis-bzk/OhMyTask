@@ -1,0 +1,20 @@
+@use "../base/variables"as v;
+@use "../base/mixins"as m;
+
+.actions {
+  margin-top: 5rem;
+
+  &__link {
+    margin-bottom: 2rem;
+
+    // &:last-of-type{}
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  a {
+    color: v.$gray2;
+    transition: .3s;
+  }
+}

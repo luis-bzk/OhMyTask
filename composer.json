@@ -1,0 +1,18 @@
+{
+    "name": "luis/up-task",
+    "description": "PHP8, MySQL, Javascript, SASS",
+    "autoload": {
+        "psr-4": {
+            "MVC\\" : "./",
+            "Controllers\\" : "./controllers",
+            "Model\\" : "./models"
+        }
+    },
+    "authors": [
+        {
+            "name": "luis",
+            "email": "laberrezueta2@protonmail.com"
+        }
+    ],
+    "require": {}
+}

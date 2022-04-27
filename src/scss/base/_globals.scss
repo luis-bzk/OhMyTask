@@ -1,0 +1,49 @@
+@use 'variables'as v;
+@use "../base/mixins"as m;
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-family: v.$fontPrincipal;
+  font-weight: 300;
+  font-size: 1.6rem;
+  color: v.$black;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+
+.container {
+  width: 95%;
+  max-width: 120rem;
+  margin: 0 auto;
+}
+
+.container-sm {
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+.container-md {
+  max-width: 70rem;
+  margin: 0 auto;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
