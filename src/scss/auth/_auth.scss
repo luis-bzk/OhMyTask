@@ -1,7 +1,7 @@
 @use "../base/variables"as v;
 @use "../base/mixins"as m;
 
-.header-login {
+.header-auth {
   padding: 1rem 5rem;
   background-color: v.$white;
 
@@ -10,9 +10,8 @@
   }
 
   .tittle-app {
-    color: transparent;
-    background: linear-gradient(to right, v.$pink 0%, v.$purple 100%);
-    background-clip: text;
+    // background: linear-gradient(to right, v.$pink 0%, v.$purple 100%);
+    // background-clip: text;
 
     @include m.min_tablet {
       max-width: 20rem;
@@ -26,22 +25,21 @@
   }
 }
 
-.login-box {
+.auth-box {
   margin-top: 5rem;
+  margin-bottom: 5rem;
   padding: 3rem 5rem 5rem 5rem;
   background-color: v.$white;
   border-radius: 1rem;
   box-shadow: 0px 0px 35px 0px rgba(0, 0, 0, 0.281);
 
   // button in login
-  .button-input {
-    @include m.button(v.$purple, v.$white, "block");
-    width: 100%;
-    border-radius: .5rem;
-  }
+  // .button-input {
+  //   @include m.button(v.$purple, v.$white, "block");
+  //   width: 100%;
+  //   border-radius: .5rem;
+  // }
 
   // links in actions
-  a:hover {
-    color: v.$purple;
-  }
+
 }

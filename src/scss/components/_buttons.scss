@@ -1,8 +1,2 @@
 @use "../base/variables"as v;
 @use "../base/mixins"as m;
-
-.button-input {
-  @include m.button(v.$purple, v.$white, "block");
-  width: 100%;
-  border-radius: .5rem;
-}

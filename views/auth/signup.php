@@ -1,28 +1,45 @@
-<div class="header-login">
-  <h1 class="tittle-app">UpTask</h1>
-  <p class="tagline">Create & manage your projects</p>
-</div>
+<div class="signup-view">
 
-<div class="container-sm login-box">
-  <p class="page-description">Sign in</p>
+  <!-- import app title -->
+  <?php include_once  __DIR__ . "/../templates/headerName.php" ?>
 
-  <form action="/" method="POST" class="form">
-    <div class="field">
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" />
+  <!-- content -->
+
+  <div class="container-sm auth-box">
+    <p class="page-description">Create an account</p>
+
+    <form action="/" method="POST" class="form">
+      <div class="field">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" />
+      </div>
+
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" />
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" />
+      </div>
+
+      <div class="field">
+        <label for="password2">Repeat Your Password</label>
+        <input type="password" id="password2" name="password2" />
+      </div>
+
+      <!-- button -->
+      <input type="submit" class="button-input" value="Login">
+    </form>
+
+    <!-- nav actions -->
+    <div class="actions">
+      <p class="actions__link">Have an acount?
+        <a href="/">Login</a>
+      </p>
+      <a class="actions__link" href="/reset_password">Forgot your password</a>
     </div>
-    <div class="field">
-      <label for="password">Password</label>
-      <input type="password" id="password" name="password" />
-    </div>
 
-    <input type="submit" class="button-input" value="Login">
-  </form>
-
-  <div class="actions">
-    <p class="actions__link">Don't have an acount?
-      <a href="/signup">Create one</a>
-    </p>
-    <a class="actions__link" href="/reset_password">Forgot your password</a>
   </div>
 </div>

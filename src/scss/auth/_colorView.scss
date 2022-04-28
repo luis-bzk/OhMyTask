@@ -1,0 +1,36 @@
+@use "../base/variables"as v;
+@use "../base/mixins"as m;
+
+.login-view {
+  .tittle-app {
+    @include m.tittle-app(v.$pink, v.$purple)
+  }
+
+  .auth-box {
+    .button-input {
+      @include m.button_input(v.$purple, v.$white, "block");
+    }
+
+    a:hover {
+      color: v.$purple;
+    }
+
+  }
+}
+
+.signup-view {
+  .tittle-app {
+    @include m.tittle-app(v.$blue, v.$green)
+  }
+
+  .auth-box {
+    .button-input {
+      @include m.button_input(v.$blue, v.$white, "block");
+    }
+
+    a:hover {
+      color: v.$blue;
+    }
+
+  }
+}

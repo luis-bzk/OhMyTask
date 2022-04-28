@@ -1,11 +1,11 @@
-<div class="header-login">
-  <h1 class="tittle-app">UpTask</h1>
-  <p class="tagline">Create & manage your projects</p>
-</div>
+<div class="login-view">
 
-<div class="container">
+  <!-- import app title -->
+  <?php include_once  __DIR__ . "/../templates/headerName.php" ?>
 
-  <div class="container-sm login-box">
+  <!-- content -->
+
+  <div class="container-sm auth-box">
     <p class="page-description">Sign in</p>
 
     <form action="/" method="POST" class="form">
@@ -18,14 +18,17 @@
         <input type="password" id="password" name="password" />
       </div>
 
+      <!-- button -->
       <input type="submit" class="button-input" value="Login">
     </form>
 
+    <!-- nav actions -->
     <div class="actions">
       <p class="actions__link">Don't have an acount?
         <a href="/signup">Create one</a>
       </p>
       <a class="actions__link" href="/reset_password">Forgot your password</a>
     </div>
+
   </div>
 </div>
