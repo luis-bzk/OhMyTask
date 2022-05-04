@@ -1,0 +1,23 @@
+@use "../base/variables"as v;
+
+.alert {
+  margin-top: 1.5rem;
+  padding: 1rem 0;
+  width: 100%;
+  background-color: v.$white;
+  font-size: 1.4rem;
+  transition: .3s;
+
+  &.error {
+    color: v.$red;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: lighten($color: v.$red, $amount: 38%);
+    border-left: .5rem solid v.$red;
+    padding-left: 1rem;
+    transform: translateX(1.2rem);
+  }
+
+}

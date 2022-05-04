@@ -36,6 +36,33 @@ class LoginController
       $user->synchronize($_POST);
 
       $alerts = $user->accountValidation();
+
+      if (empty($alerts)) {
+        $userExists = User::where("email", $user->email);
+
+        if ($userExists) {
+          User::setAlert("error", "This user is registered");
+          $alerts = User::getAlerts();
+        } else {
+
+          // hash password
+          $user->hashPassword();
+
+          // delete password2
+          unset($user->password2);
+
+          // token generation
+          $user->createToken();
+
+          // save user 
+
+          $result = $user->save();
+
+          if ($result) {
+            header("Location: /message_verification");
+          }
+        }
+      }
     }
 
     // render view

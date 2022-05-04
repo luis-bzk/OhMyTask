@@ -11,7 +11,9 @@
     margin-bottom: 3rem;
 
     input {
-      padding: 1rem;
+      font-weight: 300;
+      color: lighten($color: v.$black, $amount: 20%);
+      padding: 1rem 0 .5rem 0;
       border: none;
       outline: none;
       border-bottom: .1rem solid v.$gray;

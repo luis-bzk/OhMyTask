@@ -15,7 +15,7 @@ class User extends ActiveRecord
     $this->password = $args["password"] ?? '';
     $this->password2 = $args["password2"] ?? '';
     $this->token = $args["token"] ?? '';
-    $this->confirmed = $args["confirmed"] ?? '';
+    $this->confirmed = $args["confirmed"] ?? 0;
   }
 
   public function accountValidation()
@@ -36,7 +36,18 @@ class User extends ActiveRecord
       self::$alerts["error"][] = "The passwords are different";
     }
 
-
     return self::$alerts;
+  }
+
+  // password hash
+  public function hashPassword()
+  {
+    $this->password = password_hash($this->password, PASSWORD_BCRYPT);
+  }
+
+  // generate token
+  public function createToken()
+  {
+    $this->token = uniqid();
   }
 }
