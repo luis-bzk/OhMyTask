@@ -8,18 +8,20 @@
   <div class="container-sm auth-box">
     <p class="page-description">Create an account</p>
 
-    <form action="/" method="POST" class="form">
+    <?php include_once  __DIR__ . "/../templates/alerts.php" ?>
+
+    <form action="/signup" method="POST" class="form">
       <div class="field">
         <label for="name">Name</label>
-        <input type="text" id="name" name="name" />
+        <input type="text" id="name" name="name" value="<?php echo $user->name ?>" />
       </div>
 
       <div class="field">
         <label for="email">Email</label>
-        <input type="email" id="email" name="email" />
+        <input type="email" id="email" name="email" value="<?php echo $user->email; ?>" />
       </div>
 
-      <div class="field">
+      <div class=" field">
         <label for="password">Password</label>
         <input type="password" id="password" name="password" />
       </div>
@@ -30,7 +32,7 @@
       </div>
 
       <!-- button -->
-      <input type="submit" class="button-input" value="Login">
+      <input type="submit" class="button-input" value="Create account">
     </form>
 
     <!-- nav actions -->

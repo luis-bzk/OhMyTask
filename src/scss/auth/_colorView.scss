@@ -1,35 +1,97 @@
 @use "../base/variables"as v;
 @use "../base/mixins"as m;
 
+// login auth view
 .login-view {
   .tittle-app {
-    @include m.tittle-app(v.$pink, v.$purple)
+    @include m.tittle-app(v.$blue, v.$pacificBlue);
   }
 
   .auth-box {
     .button-input {
-      @include m.button_input(v.$purple, v.$white, "block");
+      @include m.button_input(v.$pacificBlue, v.$white, "block");
     }
 
     a:hover {
-      color: v.$purple;
+      color: v.$pacificBlue;
     }
 
   }
 }
 
+// create account auth view
 .signup-view {
   .tittle-app {
-    @include m.tittle-app(v.$blue, v.$green)
+    @include m.tittle-app(v.$orange, v.$rajah)
   }
 
   .auth-box {
     .button-input {
-      @include m.button_input(v.$blue, v.$white, "block");
+      @include m.button_input(v.$rajah, v.$white, "block");
     }
 
     a:hover {
-      color: v.$blue;
+      color: v.$rajah;
+    }
+
+  }
+}
+
+// reset passsword auth view
+.reset-view {
+  .tittle-app {
+    @include m.tittle-app(v.$red, v.$bigDipUruby)
+  }
+
+  .auth-box {
+    .button-input {
+      @include m.button_input(v.$bigDipUruby, v.$white, "block");
+    }
+
+    a:hover {
+      color: v.$bigDipUruby;
+    }
+
+  }
+}
+
+// recover passsword auth view
+.recover-view {
+  .tittle-app {
+    @include m.tittle-app(v.$purple, v.$russianViolet)
+  }
+
+  .auth-box {
+    .button-input {
+      @include m.button_input(v.$russianViolet, v.$white, "block");
+    }
+
+    a:hover {
+      color: v.$russianViolet;
+    }
+
+  }
+}
+
+
+// recover passsword auth view
+.message-view {
+  .tittle-app {
+    @include m.tittle-app(v.$pink, v.$radicalRed)
+  }
+
+}
+
+// recover passsword auth view
+.confirm-view {
+  .tittle-app {
+    @include m.tittle-app(v.$blue, v.$darkCornFlower)
+  }
+
+  .auth-box {
+
+    a:hover {
+      color: v.$darkCornFlower;
     }
 
   }
