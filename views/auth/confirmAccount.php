@@ -4,9 +4,10 @@
   <?php include_once  __DIR__ . "/../templates/headerName.php" ?>
 
   <!-- content -->
-
   <div class="container-sm auth-box">
-    <p>Your account was confirmed!</p>
+
+    <!-- alerts -->
+    <?php include_once  __DIR__ . "/../templates/alerts.php" ?>
 
     <!-- nav actions -->
     <div class="actions">

@@ -2,6 +2,7 @@
 
 namespace Controllers;
 
+use Classes\Email;
 use Model\User;
 use MVC\Router;
 
@@ -54,9 +55,15 @@ class LoginController
           // token generation
           $user->createToken();
 
-          // save user 
-
+          // save new user 
           $result = $user->save();
+
+          //create new email
+          $email = new Email($user->email, $user->name, $user->token);
+
+          // send email verification
+          $email->sendInfo();
+
 
           if ($result) {
             header("Location: /message_verification");
@@ -84,8 +91,34 @@ class LoginController
   // message account validariom
   public static function confirm_account(Router $router)
   {
+    $alerts = [];
+    $token = sanitize($_GET['token']);
+
+    if (!$token) {
+      header('Location: /');
+    }
+
+    $user = User::where("token", $token);
+
+    if (empty($user)) {
+      // not token
+      User::setAlert("error", "Invalid token");
+    } else {
+      // confirm account
+      User::setAlert("succes", "Your account was confirmed!");
+      $user->confirmed = 1;
+      $user->token = '';
+      unset($user->password2);
+
+      // save
+      $user->save();
+    }
+
+    $alerts = User::getAlerts();
+
     $router->render('auth/confirmAccount', [
-      "title" => "Account confirmed"
+      "title" => "Account confirmed",
+      "alerts" => $alerts
     ]);
   }
 

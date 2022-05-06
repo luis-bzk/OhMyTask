@@ -22,12 +22,14 @@ class ComposerAutoloaderInite62a21f49608f2634dc38f0f509f128c
             return self::$loader;
         }
 
+        require __DIR__ . '/platform_check.php';
+
         spl_autoload_register(array('ComposerAutoloaderInite62a21f49608f2634dc38f0f509f128c', 'loadClassLoader'), true, true);
         self::$loader = $loader = new \Composer\Autoload\ClassLoader(\dirname(__DIR__));
         spl_autoload_unregister(array('ComposerAutoloaderInite62a21f49608f2634dc38f0f509f128c', 'loadClassLoader'));
 
         require __DIR__ . '/autoload_static.php';
-        \Composer\Autoload\ComposerStaticInite62a21f49608f2634dc38f0f509f128c::getInitializer($loader)();
+        call_user_func(\Composer\Autoload\ComposerStaticInite62a21f49608f2634dc38f0f509f128c::getInitializer($loader));
 
         $loader->register(true);
 

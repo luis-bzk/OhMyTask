@@ -8,6 +8,7 @@
   <div class="container-sm auth-box">
     <p class="page-description">Create an account</p>
 
+    <!-- alerts -->
     <?php include_once  __DIR__ . "/../templates/alerts.php" ?>
 
     <form action="/signup" method="POST" class="form">

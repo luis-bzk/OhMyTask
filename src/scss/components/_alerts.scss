@@ -10,14 +10,25 @@
 
   &.error {
     color: v.$red;
+
+    &:hover {
+      background-color: lighten($color: v.$red, $amount: 38%);
+      border-left: .5rem solid v.$red;
+    }
+  }
+
+  &.succes {
+    color: v.$green;
+
+    &:hover {
+      background-color: lighten($color: v.$green, $amount: 46%);
+      border-left: .5rem solid v.$green;
+    }
   }
 
   &:hover {
     cursor: pointer;
-    background-color: lighten($color: v.$red, $amount: 38%);
-    border-left: .5rem solid v.$red;
     padding-left: 1rem;
     transform: translateX(1.2rem);
   }
-
 }
