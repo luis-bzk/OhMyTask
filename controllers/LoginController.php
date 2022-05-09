@@ -125,11 +125,42 @@ class LoginController
   // reset password account
   public static function reset_password(Router $router)
   {
+    $alerts = [];
 
-    if ($_SERVER["REQUEST_METHOD"] === "POST");
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+      $user = new User($_POST);
+      $alerts = $user->emailValidation();
+
+      if (empty($alerts)) {
+        $userFound = $user->where('email', $user->email);
+
+        if ($userFound && $userFound->confirmed === "1") {
+          // user found
+
+          // new token
+          $userFound->createToken();
+          unset($userFound->password2);
+
+          // update user
+          $userFound->save();
+
+          //send email
+          $email = new Email($userFound->email, $userFound->name, $userFound->token);
+
+          $email->sendInstructions();
+
+          // print alert
+          User::setAlert("succes", "We have sent instructions to your email");
+        } else {
+          User::setAlert("error", "Invalid email or user not confirmed");
+        }
+      }
+    }
+    $alerts = User::getAlerts();
 
     $router->render('auth/resetPassword', [
-      "title" => "Reset your password"
+      "title" => "Reset your password",
+      "alerts" => $alerts
     ]);
   }
 
@@ -137,11 +168,58 @@ class LoginController
   // reset password account
   public static function recover_password(Router $router)
   {
+    $alerts = [];
+    $token = sanitize($_GET["token"]);
 
-    if ($_SERVER["REQUEST_METHOD"] === "POST");
+    $showInputs = true;
 
+    if (!$token) {
+      header('Location: /');
+    }
+
+    // user found
+    $user = User::where("token", $token);
+
+    if (empty($user)) {
+      // not token
+      $showInputs = false;
+      User::setAlert("error", "Invalid token");
+    }
+
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+      $user->synchronize($_POST);
+      // debug($user);
+
+      $alerts = $user->passwordValidation();
+
+      if (empty($alerts)) {
+
+
+        // hash password
+        $user->hashPassword();
+
+        // delete password2
+        unset($user->password2);
+
+        // delete token
+        $user->token = "";
+
+        // save new user 
+        $result = $user->save();
+
+        if ($result) {
+          header("Location: /");
+        }
+      }
+    }
+
+
+    $alerts = User::getAlerts();
     $router->render('auth/recoverPassword', [
-      "title" => "Recover your password"
+      "title" => "Recover your password",
+      "alerts" => $alerts,
+      "showInputs" => $showInputs
     ]);
   }
 }

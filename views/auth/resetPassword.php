@@ -7,7 +7,10 @@
   <div class="container-sm auth-box">
     <p class="page-description">Reset your account</p>
 
-    <form action="/" method="POST" class="form">
+    <!-- alerts -->
+    <?php include_once  __DIR__ . "/../templates/alerts.php" ?>
+
+    <form action="/reset_password" method="POST" class="form">
 
       <div class="field">
         <label for="email">Email</label>

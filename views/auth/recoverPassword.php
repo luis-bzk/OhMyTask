@@ -8,7 +8,11 @@
   <div class="container-sm auth-box">
     <p class="page-description">Set your new password</p>
 
-    <form action="/recover_password" method="POST" class="form">
+    <!-- alerts -->
+    <?php include_once  __DIR__ . "/../templates/alerts.php" ?>
+
+    <?php if ($showInputs) : ?>
+    <form method="POST" class="form">
 
       <div class="field">
         <label for="password">Password</label>
@@ -23,6 +27,8 @@
       <!-- button -->
       <input type="submit" class="button-input" value="Save password">
     </form>
+    <?php endif; ?>
+
 
     <!-- nav actions -->
     <div class="actions">

@@ -50,4 +50,33 @@ class User extends ActiveRecord
   {
     $this->token = uniqid();
   }
+
+  // email validation
+  public function emailValidation()
+  {
+    if (!$this->email) {
+      self::$alerts["error"][] = "Email is required";
+    }
+    // invalid email structure
+    if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+      self::$alerts["error"][] = "Invalid email format";
+    }
+
+    return self::$alerts;
+  }
+
+  public function passwordValidation()
+  {
+    if ($this->password === '') {
+      self::$alerts["error"][] = "A user password is required";
+    }
+    if (strlen($this->password) < 6) {
+      self::$alerts["error"][] = "The password must be greater than 6 characters";
+    }
+    if ($this->password !== $this->password2) {
+      self::$alerts["error"][] = "The passwords are different";
+    }
+
+    return self::$alerts;
+  }
 }
