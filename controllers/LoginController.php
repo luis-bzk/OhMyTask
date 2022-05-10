@@ -12,12 +12,43 @@ class LoginController
   //login with an account
   public static function login(Router $router)
   {
+    $alerts = [];
 
-    if ($_SERVER["REQUEST_METHOD"] === "POST");
+
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+      $auth = new User($_POST);
+
+      $alerts = $auth->loginValidation();
+
+      if (empty($alerts)) {
+        // user verification
+        $user = User::where("email", $auth->email);
+
+        if (!$user || !$user->confirmed) {
+          User::setAlert("error", "Invalid email user or user not confirmed");
+        } else {
+          // users exists
+          if (password_verify($_POST["password"], $user->password)) {
+            // ser inition start
+            session_start();
+            $_SESSION["id"] = $user->id;
+            $_SESSION["name"] = $user->name;
+            $_SESSION["login"] = true;
+
+            // redirection
+            header('Location: /dashboard');
+          } else {
+            User::setAlert("error", "Invalid password");
+          }
+        }
+      }
+    }
+    $alerts = User::getAlerts();
 
     // render view
     $router->render('auth/login', [
-      "title" => "Login"
+      "title" => "Login",
+      "alerts" => $alerts
     ]);
   }
 
@@ -83,6 +114,7 @@ class LoginController
   // message account validariom
   public static function message_verification(Router $router)
   {
+    // render view
     $router->render('auth/messageVer', [
       "title" => "Message Verification"
     ]);
@@ -116,6 +148,7 @@ class LoginController
 
     $alerts = User::getAlerts();
 
+    // render view
     $router->render('auth/confirmAccount', [
       "title" => "Account confirmed",
       "alerts" => $alerts
@@ -158,6 +191,7 @@ class LoginController
     }
     $alerts = User::getAlerts();
 
+    // render view
     $router->render('auth/resetPassword', [
       "title" => "Reset your password",
       "alerts" => $alerts
@@ -189,7 +223,6 @@ class LoginController
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
       $user->synchronize($_POST);
-      // debug($user);
 
       $alerts = $user->passwordValidation();
 
@@ -214,7 +247,7 @@ class LoginController
       }
     }
 
-
+    // render view
     $alerts = User::getAlerts();
     $router->render('auth/recoverPassword', [
       "title" => "Recover your password",

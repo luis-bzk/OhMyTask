@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/../includes/app.php';
 
+use Controllers\DashboardController;
 use Controllers\LoginController;
 use MVC\Router;
 
@@ -30,6 +31,8 @@ $router->get("/message_verification", [LoginController::class, "message_verifica
 $router->get("/confirm_account", [LoginController::class, "confirm_account"]);
 
 
+// PROJECT ZONE USER
+$router->get("/dashboard", [DashboardController::class, "index"]);
 
 
 // Checks and validates routes, if they exist, and assigns Controller functions to them

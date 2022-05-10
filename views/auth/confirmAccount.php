@@ -1,18 +1,20 @@
-<div class="confirm-view">
+<div class="auth__view">
+  <div class="confirm-view">
 
-  <!-- import app title -->
-  <?php include_once  __DIR__ . "/../templates/headerName.php" ?>
+    <!-- import app title -->
+    <?php include_once  __DIR__ . "/../templates/headerName.php" ?>
 
-  <!-- content -->
-  <div class="container-sm auth-box">
+    <!-- content -->
+    <div class="container-sm auth-box">
 
-    <!-- alerts -->
-    <?php include_once  __DIR__ . "/../templates/alerts.php" ?>
+      <!-- alerts -->
+      <?php include_once  __DIR__ . "/../templates/alerts.php" ?>
 
-    <!-- nav actions -->
-    <div class="actions">
-      <a class="actions__link" href="/">Login</a>
+      <!-- nav actions -->
+      <div class="actions">
+        <a class="actions__link" href="/">Login</a>
+      </div>
+
     </div>
-
   </div>
 </div>

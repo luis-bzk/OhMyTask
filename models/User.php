@@ -7,6 +7,7 @@ class User extends ActiveRecord
   protected static $table = "users";
   protected static $columnsDB = ["id", "name", "email", "password", "token", "confirmed"];
 
+  // constructor class
   public function __construct($args = [])
   {
     $this->id = $args["id"] ?? null;
@@ -18,6 +19,24 @@ class User extends ActiveRecord
     $this->confirmed = $args["confirmed"] ?? 0;
   }
 
+  // login validation inn system
+  public function loginValidation()
+  {
+    if ($this->email === '') {
+      self::$alerts["error"][] = "A user email is requeried";
+    }
+    if ($this->password === '') {
+      self::$alerts["error"][] = "A user password is required";
+    }
+    // invalid email structure
+    if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+      self::$alerts["error"][] = "Invalid email format";
+    }
+
+    return self::$alerts;
+  }
+
+  // validate an account when user is signup
   public function accountValidation()
   {
     if ($this->name === '') {
@@ -25,6 +44,10 @@ class User extends ActiveRecord
     }
     if ($this->email === '') {
       self::$alerts["error"][] = "A user email is required";
+    }
+    // invalid email structure
+    if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+      self::$alerts["error"][] = "Invalid email format";
     }
     if ($this->password === '') {
       self::$alerts["error"][] = "A user password is required";
@@ -39,19 +62,19 @@ class User extends ActiveRecord
     return self::$alerts;
   }
 
-  // password hash
+  // password hash 
   public function hashPassword()
   {
     $this->password = password_hash($this->password, PASSWORD_BCRYPT);
   }
 
-  // generate token
+  // generate token 
   public function createToken()
   {
     $this->token = uniqid();
   }
 
-  // email validation
+  // email validation to reset password
   public function emailValidation()
   {
     if (!$this->email) {
@@ -65,6 +88,7 @@ class User extends ActiveRecord
     return self::$alerts;
   }
 
+  // in recover password, validate 2 passwords
   public function passwordValidation()
   {
     if ($this->password === '') {

@@ -14,7 +14,7 @@
   <title>OhMyTask | <?php echo $title ?? ''; ?></title>
 </head>
 
-<body class="my-view">
+<body>
   <?php echo $content; ?>
 
 </body>
