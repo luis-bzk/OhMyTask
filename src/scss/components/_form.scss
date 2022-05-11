@@ -10,7 +10,8 @@
     justify-content: center;
     margin-bottom: 3rem;
 
-    input {
+    input:not([type="submit"]) {
+      background-color: transparent;
       font-weight: 300;
       color: lighten($color: v.$black, $amount: 20%);
       padding: 1rem 0 .5rem 0;

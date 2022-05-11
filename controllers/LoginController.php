@@ -12,12 +12,12 @@ class LoginController
   //login with an account
   public static function login(Router $router)
   {
+    // variables
     $alerts = [];
 
-
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
+      // set variables
       $auth = new User($_POST);
-
       $alerts = $auth->loginValidation();
 
       if (empty($alerts)) {
@@ -29,7 +29,7 @@ class LoginController
         } else {
           // users exists
           if (password_verify($_POST["password"], $user->password)) {
-            // ser inition start
+            // set inition start && session values
             session_start();
             $_SESSION["id"] = $user->id;
             $_SESSION["name"] = $user->name;
@@ -55,18 +55,21 @@ class LoginController
   // logout on account
   public static function logout()
   {
-    echo "desde logout";
+    isSession();
+    $_SESSION = [];
+    header('Location: /');
   }
 
   // create account
   public static function signup(Router $router)
   {
+    // variables
     $user = new User;
     $alerts = [];
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
+      // set variables
       $user->synchronize($_POST);
-
       $alerts = $user->accountValidation();
 
       if (empty($alerts)) {
@@ -95,7 +98,6 @@ class LoginController
           // send email verification
           $email->sendInfo();
 
-
           if ($result) {
             header("Location: /message_verification");
           }
@@ -123,15 +125,19 @@ class LoginController
   // message account validariom
   public static function confirm_account(Router $router)
   {
+    // variables
     $alerts = [];
     $token = sanitize($_GET['token']);
 
+    // token validation
     if (!$token) {
       header('Location: /');
     }
 
+    // set variables
     $user = User::where("token", $token);
 
+    // token validation data
     if (empty($user)) {
       // not token
       User::setAlert("error", "Invalid token");
@@ -155,20 +161,23 @@ class LoginController
     ]);
   }
 
-  // reset password account
+  // reset password account solicitude
   public static function reset_password(Router $router)
   {
+    // variables
     $alerts = [];
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
+      // set variables
       $user = new User($_POST);
       $alerts = $user->emailValidation();
 
+      // if not alerts
       if (empty($alerts)) {
         $userFound = $user->where('email', $user->email);
 
         if ($userFound && $userFound->confirmed === "1") {
-          // user found
+          // if user found
 
           // new token
           $userFound->createToken();
@@ -179,7 +188,6 @@ class LoginController
 
           //send email
           $email = new Email($userFound->email, $userFound->name, $userFound->token);
-
           $email->sendInstructions();
 
           // print alert
@@ -198,15 +206,15 @@ class LoginController
     ]);
   }
 
-
-  // reset password account
+  // recover (change) password account
   public static function recover_password(Router $router)
   {
+    // variables
     $alerts = [];
     $token = sanitize($_GET["token"]);
-
     $showInputs = true;
 
+    // tioken validation
     if (!$token) {
       header('Location: /');
     }
@@ -221,9 +229,8 @@ class LoginController
     }
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
-
+      // set variables
       $user->synchronize($_POST);
-
       $alerts = $user->passwordValidation();
 
       if (empty($alerts)) {
@@ -241,6 +248,7 @@ class LoginController
         // save new user 
         $result = $user->save();
 
+        // redirect location
         if ($result) {
           header("Location: /");
         }

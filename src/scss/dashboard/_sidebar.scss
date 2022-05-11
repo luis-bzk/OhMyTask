@@ -1,0 +1,37 @@
+@use "../base/variables"as v;
+@use "../base/mixins"as m;
+
+.sidebar {
+  background-color: v.$white;
+  padding: 1rem;
+
+  h2 {
+    text-align: center;
+    @include m.tittle-app(v.$blue, v.$pacificBlue);
+  }
+
+  .sidebar-nav {
+    margin-top: 5rem;
+
+    a {
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      border-radius: .5rem;
+      display: block;
+      font-weight: 500;
+      font-size: 1.4rem;
+      color: v.$pacificBlue;
+      transition: .3s;
+
+      &:hover {
+        // color: v.$white;
+        background-color: lighten($color: v.$pacificBlue, $amount: 42%);
+      }
+
+      &.active {
+        background-color: lighten($color: v.$pacificBlue, $amount: 42%);
+      }
+    }
+
+  }
+}

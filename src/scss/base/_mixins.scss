@@ -40,6 +40,7 @@
 
 @mixin button($bgColor, $textColor, $display) {
   border: none;
+  border-radius: .5rem;
   display: $display;
   padding: 1.5rem 2rem;
   font-size: 1.8rem;
@@ -60,7 +61,6 @@
 
   @include button($bgColor, $textColor, $display);
   width: 100%;
-  border-radius: .5rem;
 }
 
 

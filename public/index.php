@@ -34,6 +34,10 @@ $router->get("/confirm_account", [LoginController::class, "confirm_account"]);
 // PROJECT ZONE USER
 $router->get("/dashboard", [DashboardController::class, "index"]);
 
+$router->get("/create-projects", [DashboardController::class, "createProjects"]);
+
+$router->get("/profile", [DashboardController::class, "profile"]);
+
 
 // Checks and validates routes, if they exist, and assigns Controller functions to them
 $router->checkRoutes();
