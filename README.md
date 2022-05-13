@@ -1,4 +1,4 @@
-# UpTask
+# ohMyTask
 Uptask php, js, scss, sql
 
 ## login controller completed
