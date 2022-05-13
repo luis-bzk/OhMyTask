@@ -2,6 +2,7 @@
 
 namespace Controllers;
 
+use Model\Project;
 use MVC\Router;
 
 class DashboardController
@@ -23,7 +24,7 @@ class DashboardController
   }
 
   // create a project
-  public static function createProjects(Router $router)
+  public static function createProject(Router $router)
   {
     // variables
     $alerts = [];
@@ -33,11 +34,32 @@ class DashboardController
     // if is auth continue
     isAuth();
 
+    if ($_SERVER['REQUEST_METHOD'] === "POST") {
+      // variables
+      $project = new Project($_POST);
+
+      // validatcion
+      $alerts = $project->projectValidation();
+
+      if (empty($alerts)) {
+        // url generation
+        $project->createUrl();
+
+        // save project with owner id
+        $project->ownerId = $_SESSION['id'];
+
+        // save the project
+        $project->save();
+
+        // redirection
+        header('Location: /project?id=' . $project->url);
+      }
+    }
+
     // show view
-    $router->render("dashboard/createProjects", [
+    $router->render("dashboard/createProject", [
       'title' => "Create Projects",
       'alerts' => $alerts
-
     ]);
   }
 

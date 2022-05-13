@@ -34,7 +34,8 @@ $router->get("/confirm_account", [LoginController::class, "confirm_account"]);
 // PROJECT ZONE USER
 $router->get("/dashboard", [DashboardController::class, "index"]);
 
-$router->get("/create-projects", [DashboardController::class, "createProjects"]);
+$router->get("/create-project", [DashboardController::class, "createProject"]);
+$router->post("/create-project", [DashboardController::class, "createProject"]);
 
 $router->get("/profile", [DashboardController::class, "profile"]);
 

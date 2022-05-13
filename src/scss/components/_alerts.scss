@@ -2,14 +2,17 @@
 
 .alert {
   margin-top: 1.5rem;
-  padding: 1rem 0;
+  padding: 1rem 1rem;
   width: 100%;
-  background-color: v.$white;
+  background-color: none;
   font-size: 1.4rem;
-  transition: .3s;
+  transition: .2s;
+
 
   &.error {
-    color: v.$red;
+    color: darken($color: v.$red, $amount: 10%);
+    border-left: .2rem solid v.$red;
+
 
     &:hover {
       background-color: lighten($color: v.$red, $amount: 38%);
@@ -19,6 +22,8 @@
 
   &.succes {
     color: v.$green;
+    border-left: .2rem solid v.$green;
+
 
     &:hover {
       background-color: lighten($color: v.$green, $amount: 46%);
@@ -28,7 +33,6 @@
 
   &:hover {
     cursor: pointer;
-    padding-left: 1rem;
     transform: translateX(1.2rem);
   }
 }

@@ -4,6 +4,7 @@ namespace Model;
 
 class User extends ActiveRecord
 {
+  // variables
   protected static $table = "users";
   protected static $columnsDB = ["id", "name", "email", "password", "token", "confirmed"];
 

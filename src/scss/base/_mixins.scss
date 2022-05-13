@@ -58,12 +58,9 @@
 }
 
 @mixin button_input($bgColor, $textColor, $display) {
-
   @include button($bgColor, $textColor, $display);
   width: 100%;
 }
-
-
 
 @mixin grid($columns, $space) {
   display: grid;
