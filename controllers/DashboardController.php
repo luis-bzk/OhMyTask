@@ -63,6 +63,43 @@ class DashboardController
     ]);
   }
 
+  //
+  public static function project(Router $router)
+  {
+    // variables
+    $title = "Project";
+
+    // if !session start session 
+    isSession();
+    // if is auth continue
+    isAuth();
+
+    // yrl id project validation
+    $urlId = $_GET["id"];
+
+    if (!$urlId) {
+      header('Location: /dashboard');
+    }
+
+    // project url security -> owner
+    $project = Project::where("url", $urlId);
+
+    // project irl validation
+    if (!$project) {
+      header('Location: /dashboard');
+    }
+
+    // owner project validation
+    if ($project->ownerId !== $_SESSION["id"]) {
+      header('Location: /dashboard');
+    }
+
+
+    $router->render("dashboard/project", [
+      "title" => $title
+    ]);
+  }
+
   // show user profile
   public static function profile(Router $router)
   {
