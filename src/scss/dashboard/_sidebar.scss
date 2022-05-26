@@ -2,16 +2,17 @@
 @use "../base/mixins"as m;
 
 .sidebar {
-  background-color: v.$white;
-  padding: 1rem;
+  background-color: v.$spaceCadet;
+  padding: 1rem 2rem;
 
   h2 {
+    margin-top: 1rem;
     text-align: center;
-    @include m.tittle-app(v.$blue, v.$pacificBlue);
+    color: v.$white;
   }
 
   .sidebar-nav {
-    margin-top: 5rem;
+    margin-top: 4rem;
 
     a {
       margin-bottom: 1.5rem;
@@ -20,16 +21,20 @@
       display: block;
       font-weight: 500;
       font-size: 1.4rem;
-      color: v.$pacificBlue;
+      color: v.$white;
       transition: .3s;
+
+      @include m.max_tablet {
+        font-size: 1.6rem;
+      }
 
       &:hover {
         // color: v.$white;
-        background-color: lighten($color: v.$pacificBlue, $amount: 42%);
+        background-color: v.$blackCoral;
       }
 
       &.active {
-        background-color: lighten($color: v.$pacificBlue, $amount: 42%);
+        background-color: v.$blackCoral;
       }
     }
 

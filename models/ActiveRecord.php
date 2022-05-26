@@ -140,12 +140,20 @@ class ActiveRecord
     return array_shift($result);
   }
 
-  // Search a value in a column in a table where is a Reference
+  // Search a value in a column in a table where is a Reference (OBJECT)
   public static function where($column, $value)
   {
     $query = "SELECT * FROM " . static::$table . " WHERE ${column} = '${value}'";
     $result = self::consultSQL($query);
     return array_shift($result);
+  }
+
+  // Search * values in a column in a table where is a Reference (ARRAY)
+  public static function belongsTo($column, $value)
+  {
+    $query = "SELECT * FROM " . static::$table . " WHERE ${column} = '${value}'";
+    $result = self::consultSQL($query);
+    return $result;
   }
 
   // Pass your main consult SQL from a function

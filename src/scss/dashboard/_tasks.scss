@@ -1,0 +1,20 @@
+@use "../base/variables"as v;
+@use "../base/mixins"as m;
+
+.container-new-task {
+  @include m.min_tablet {
+    display: flex;
+    justify-content: end;
+  }
+
+  .button-add-task {
+
+    @include m.max_tablet {
+      @include m.button_input(v.$mandarin, v.$white, "block");
+    }
+
+    @include m.min_tablet {
+      @include m.button(v.$mandarin, v.$white, "inline-block");
+    }
+  }
+}

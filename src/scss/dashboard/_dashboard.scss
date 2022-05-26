@@ -2,31 +2,38 @@
 @use "../base/mixins"as m;
 
 .dashboard {
-  background-color: lighten($color: v.$pacificBlue, $amount: 45%);
+  // background-color: lighten($color: v.$pacificBlue, $amount: 45%);
+  background-color: v.$blackCoral;
+  background-size: cover;
+  background-attachment: fixed;
+  min-height: 100vh;
+
+  // height: 100%;
+  // @include m.max_tablet {
+  //   min-height: 100vh;
+  // }
 
   @include m.min_tablet {
     display: flex;
-    height: 100vh;
   }
 
-  @include m.max_tablet {
-    height: 100vh;
-  }
-
+  // content data on dashboard
   .main {
     flex: 1;
   }
 
+  // content formater box
   .content {
-    padding: 1rem;
+    padding: 2rem 1rem;
     margin: 1rem;
     border-radius: .5rem;
     background-color: v.$white;
 
-    h2 {
+    .page-name {
+      color: v.$mandarin;
       font-size: 2.4rem;
       text-align: center;
+      margin-bottom: 2rem;
     }
   }
-
 }

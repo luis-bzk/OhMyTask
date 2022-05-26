@@ -11,15 +11,22 @@ class DashboardController
   // all projects view
   public static function index(Router $router)
   {
+    $title = "My Projects";
+
     // if !session start session 
     isSession();
 
     // if is auth continue
     isAuth();
 
+    // projects
+    $userId = $_SESSION["id"];
+    $projects = Project::belongsTo("ownerId", $userId);
+
     // show view
     $router->render("dashboard/index", [
-      'title' => "Projects"
+      "title" => $title,
+      "projects" => $projects
     ]);
   }
 
@@ -28,12 +35,14 @@ class DashboardController
   {
     // variables
     $alerts = [];
+    $title = "Create Projects";
 
     // if !session start session 
     isSession();
     // if is auth continue
     isAuth();
 
+    // post method
     if ($_SERVER['REQUEST_METHOD'] === "POST") {
       // variables
       $project = new Project($_POST);
@@ -58,17 +67,14 @@ class DashboardController
 
     // show view
     $router->render("dashboard/createProject", [
-      'title' => "Create Projects",
-      'alerts' => $alerts
+      "title" => $title,
+      "alerts" => $alerts
     ]);
   }
 
   //
   public static function project(Router $router)
   {
-    // variables
-    $title = "Project";
-
     // if !session start session 
     isSession();
     // if is auth continue
@@ -94,6 +100,8 @@ class DashboardController
       header('Location: /dashboard');
     }
 
+    // project name
+    $title = $project->name;
 
     $router->render("dashboard/project", [
       "title" => $title
@@ -103,6 +111,9 @@ class DashboardController
   // show user profile
   public static function profile(Router $router)
   {
+    // variables
+    $title = "My Profile";
+
     // if !session start session 
     isSession();
 
@@ -111,7 +122,7 @@ class DashboardController
 
     // show view
     $router->render("dashboard/profile", [
-      'title' => "Profile"
+      "title" => $title
     ]);
   }
 }

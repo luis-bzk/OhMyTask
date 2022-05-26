@@ -1,0 +1,115 @@
+// dashboard init view
+@use "../base/variables"as v;
+@use "../base/mixins"as m;
+
+.dashboard-projects {
+  .no-projects {
+    a {
+      color: v.$mandarin;
+      font-weight: 500;
+    }
+  }
+
+  .projects-list {
+    list-style: none;
+    padding: 0;
+
+    // // tablet
+    // @include m.max_desktop {
+    //   @include m.grid(2, 1rem)
+    // }
+
+    // phone
+    @include m.max_tablet {
+      @include m.grid(1, 1rem)
+    }
+
+    // tablet
+    @include m.min_tablet {
+      @include m.grid(2, 1rem)
+    }
+
+    // desktop
+    @include m.min_desktop {
+      @include m.grid(3, 1rem)
+    }
+
+  }
+}
+
+// any card project
+.project {
+  display: flex;
+  align-items: center;
+  padding: 5rem 2rem;
+  border-radius: .5rem;
+  background-color: v.$blackCoral;
+  transition: .2s;
+  line-height: 2rem;
+
+  &:hover {
+    background-color: lighten($color: v.$blackCoral, $amount: 10%);
+    transform: translateY(-2rem);
+    box-shadow: 15px 15px 10px -1px rgba(67, 68, 69, 0.6);
+  }
+
+  // content project
+  &__content {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: .5rem 1rem;
+    border-radius: .5rem;
+    color: v.$white;
+    transition-property: color;
+    transition-duration: .3s;
+
+    // box-sizing: border-box;
+    // -moz-box-sizing: border-box;
+    // -webkit-box-sizing: border-box;
+    i {
+      z-index: 10;
+      color: v.$mandarin;
+    }
+
+    &:hover {
+      i {
+        color: v.$white;
+      }
+    }
+
+    &:hover:before {
+      border-radius: .5rem 0 0 .5rem;
+    }
+
+    // background transition
+    &:after {
+      content: "";
+      height: 100%;
+      left: 0;
+      top: 0;
+      width: 0px;
+      position: absolute;
+      transition: all 0.5s ease 0s;
+      -webkit-transition: all 0.5s ease 0s;
+      z-index: -1;
+    }
+
+    // hover transition
+    &:hover:after {
+      width: 100%;
+      border-radius: .5rem;
+    }
+
+    //  color after
+    &:after {
+      background: v.$mandarin;
+    }
+
+
+  }
+
+}

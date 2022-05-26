@@ -23,6 +23,9 @@ class Project extends ActiveRecord
     if (!$this->name) {
       self::$alerts["error"][] = "You need to set a name project";
     }
+    if (strlen($this->name) > 60) {
+      self::$alerts["error"][] = "The name project is to long";
+    }
 
     return self::$alerts;
   }

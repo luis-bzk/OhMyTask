@@ -43,7 +43,13 @@ class User extends ActiveRecord
     if ($this->name === '') {
       self::$alerts["error"][] = "A user name is required";
     }
+    if (strlen($this->name) > 45) {
+      self::$alerts["error"][] = "The user name is to long";
+    }
     if ($this->email === '') {
+      self::$alerts["error"][] = "A user email is required";
+    }
+    if (strlen($this->email) > 45) {
       self::$alerts["error"][] = "A user email is required";
     }
     // invalid email structure
