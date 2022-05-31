@@ -6,13 +6,13 @@
   width: 100%;
   background-color: none;
   font-size: 1.4rem;
+  font-weight: 300;
   transition: .2s;
-
+  text-align: left;
 
   &.error {
     color: darken($color: v.$red, $amount: 10%);
     border-left: .2rem solid v.$red;
-
 
     &:hover {
       background-color: lighten($color: v.$red, $amount: 38%);
@@ -23,7 +23,6 @@
   &.succes {
     color: v.$green;
     border-left: .2rem solid v.$green;
-
 
     &:hover {
       background-color: lighten($color: v.$green, $amount: 46%);

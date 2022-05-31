@@ -1,4 +1,3 @@
-<!-- header -->
 <?php include_once __DIR__ . "/headerDashboard.php"; ?>
 
 <div class="container-md">
@@ -10,5 +9,4 @@
   </form>
 </div>
 
-<!-- footer -->
 <?php include_once __DIR__ . "/footerDashboard.php"; ?>

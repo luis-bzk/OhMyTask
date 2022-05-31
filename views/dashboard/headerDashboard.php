@@ -1,4 +1,3 @@
-<!-- <div class="dashboard__view"> -->
 <div class="dashboard">
   <?php include_once __DIR__ . "/../templates/sidebar.php"; ?>
 
