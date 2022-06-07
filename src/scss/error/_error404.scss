@@ -1,0 +1,26 @@
+@use "../base/variables" as v;
+@use "../base/mixins" as m;
+
+.error404 {
+  position: absolute;
+  display: flex;
+  padding: 3rem;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  @include m.max_tablet {
+    flex-direction: column;
+  }
+
+  &__title {
+    text-align: center;
+    color: v.$darkCornFlower;
+  }
+
+  &__img {
+  }
+}

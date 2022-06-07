@@ -13,7 +13,7 @@ class DashboardController
   {
     $title = "My Projects";
 
-    // if !session start session 
+    // if !session start session
     isSession();
 
     // if is auth continue
@@ -37,7 +37,7 @@ class DashboardController
     $alerts = [];
     $title = "Create Projects";
 
-    // if !session start session 
+    // if !session start session
     isSession();
     // if is auth continue
     isAuth();
@@ -75,7 +75,7 @@ class DashboardController
   //
   public static function project(Router $router)
   {
-    // if !session start session 
+    // if !session start session
     isSession();
     // if is auth continue
     isAuth();
@@ -114,7 +114,7 @@ class DashboardController
     // variables
     $title = "My Profile";
 
-    // if !session start session 
+    // if !session start session
     isSession();
 
     // if is auth continue
@@ -122,6 +122,17 @@ class DashboardController
 
     // show view
     $router->render("dashboard/profile", [
+      "title" => $title
+    ]);
+  }
+
+  // error 404
+  public static function error404(Router $router)
+  {
+    $title = "Error 404!";
+
+    // show view
+    $router->render("error/error404", [
       "title" => $title
     ]);
   }

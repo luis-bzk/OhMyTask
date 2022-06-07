@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '14cd3fef9eea42519680495c2b960a15c95bd2f2',
+        'reference' => '017fee555ea0565b96ad3667a2ecb53ae29df4dc',
         'name' => 'luis/up-task',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '14cd3fef9eea42519680495c2b960a15c95bd2f2',
+            'reference' => '017fee555ea0565b96ad3667a2ecb53ae29df4dc',
             'dev_requirement' => false,
         ),
         'phpmailer/phpmailer' => array(

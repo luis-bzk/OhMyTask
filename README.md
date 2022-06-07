@@ -31,3 +31,16 @@ Uptask php, js, scss, sql
 - add a button in a project view to ad a task
 - tasks.jc = create a div that show a form to add a task in a project
 - modal.scss = styles for a modal popup when create a task
+
+## Add new Task
+
+- task.js -> async add new task function (async away), receives a task name on "sumbitNewTaskForm"
+- destructured javascript in modules.
+  - module projects
+    - functions.js = functions that use another files
+    - newTasks.js = add a new task (create modal, show message, delete modal, save modal, etc)
+    - projectTasks.js = show tasks in project.php
+
+## Set an error page view
+
+- in views -> error -> 404error.php set a new view to show an error
