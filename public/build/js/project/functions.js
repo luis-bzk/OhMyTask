@@ -1,0 +1,1 @@
+export const getProjectUrl=()=>{const e=new URLSearchParams(window.location.search);return Object.fromEntries(e.entries()).id};
