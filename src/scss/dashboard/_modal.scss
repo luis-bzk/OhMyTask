@@ -41,7 +41,6 @@
       font-weight: 500;
       font-size: 2rem;
       text-align: center;
-      color: v.$mandarin;
     }
 
     // block form
@@ -83,11 +82,11 @@
         padding: 1rem;
         font-weight: 300;
         border: .1rem solid v.$gray;
-        color: darken($color: v.$mandarin, $amount: 20%);
+        color: darken($color: v.$spaceCadet, $amount: 20%);
         transition: .3s;
 
         &:hover {
-          border: .1rem solid v.$mandarin;
+          border: .1rem solid v.$spaceCadet;
         }
       }
 
@@ -98,11 +97,11 @@
       justify-content: space-between;
 
       .button-new-task {
-        @include m.button(v.$mandarin, v.$white, "inline-block");
+        @include m.button(v.$xblue, v.$white, "inline-block");
       }
 
       .close-modal {
-        @include m.button(v.$gray2, v.$white, "inline-flex")
+        @include m.button(v.$xgrayC, v.$white, "inline-flex")
       }
     }
   }

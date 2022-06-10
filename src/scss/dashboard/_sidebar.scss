@@ -2,13 +2,17 @@
 @use "../base/mixins"as m;
 
 .sidebar {
-  background-color: v.$spaceCadet;
+  background-color: v.$xwhite;
   padding: 1rem 2rem;
+
+  @include m.min_tablet {
+    border-right: 1px solid v.$xgrayA;
+  }
 
   h2 {
     margin-top: 1rem;
     text-align: center;
-    color: v.$white;
+    color: v.$xblue;
   }
 
   .sidebar-nav {
@@ -21,7 +25,7 @@
       display: block;
       font-weight: 500;
       font-size: 1.4rem;
-      color: v.$white;
+      color: v.$black;
       transition: .3s;
 
       @include m.max_tablet {
@@ -30,11 +34,11 @@
 
       &:hover {
         // color: v.$white;
-        background-color: v.$blackCoral;
+        background-color: v.$xgrayA;
       }
 
       &.active {
-        background-color: v.$blackCoral;
+        background-color: v.$xgrayA;
       }
     }
 

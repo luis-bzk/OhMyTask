@@ -17,18 +17,18 @@ class TaskController
     // variables
     $projectUrl = $_GET["id"];
 
-    if(!$projectUrl){
+    if (!$projectUrl) {
       header("Location: /dashboard");
     }
 
     // find project
     $project = Project::where("url", $projectUrl);
 
-    if (!$project || $project->ownerId !== $_SESSION["id"]){
+    if (!$project || $project->ownerId !== $_SESSION["id"]) {
       header("Location: /404");
     }
 
-    $tasks = Task::belongsTo("project_id", $project->id );
+    $tasks = Task::belongsTo("project_id", $project->id);
 
     echo json_encode(["tasks" => $tasks]);
   }
@@ -43,8 +43,8 @@ class TaskController
       $project = Project::where("url", $projectUrl);
 
       // validation if exist project or the project was created for tha valid user
-      if (!$project || $project->ownerId !== $_SESSION["id"] ){
-        $alertAnswer =[
+      if (!$project || $project->ownerId !== $_SESSION["id"]) {
+        $alertAnswer = [
           "message" => "Oh oh... An error occurred, we can save this task, sorry",
           "type" => "error",
         ];
@@ -60,7 +60,7 @@ class TaskController
 
       // save in DBB validation
 
-      $alertAnswer =[
+      $alertAnswer = [
         "message" => "Task saved successfully!",
         "id" => $result["id"],
         "type" => "succes",

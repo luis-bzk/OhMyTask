@@ -44,3 +44,9 @@ Uptask php, js, scss, sql
 ## Set an error page view
 
 - in views -> error -> 404error.php set a new view to show an error
+
+## Complete change colors in Dashboard
+
+- change palette colors
+- add tasks in porject section
+- styles for task in tasks.scss

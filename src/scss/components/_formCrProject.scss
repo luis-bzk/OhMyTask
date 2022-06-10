@@ -9,7 +9,6 @@
 
   .field {
     display: flex;
-    // justify-content: space-between;
     margin-bottom: 3rem;
 
     @include m.min_desktop {
@@ -17,7 +16,6 @@
     }
 
     @include m.max_desktop {
-      // align-items: center;
       flex-direction: column;
       justify-content: center;
 
@@ -40,11 +38,11 @@
       font-weight: 300;
       border-radius: .5rem;
       border: .1rem solid v.$gray;
-      color: darken($color: v.$mandarin, $amount: 20%);
+      color: v.$spaceCadet;
       transition: .3s;
 
       &:hover {
-        border: .1rem solid v.$mandarin;
+        border: .1rem solid v.$spaceCadet;
       }
     }
 
@@ -52,13 +50,13 @@
 
   .button-create {
     @include m.min_desktop {
-      @include m.button(v.$mandarin, v.$white, "inline-block");
+      @include m.button(v.$xblue, v.$white, "inline-block");
       padding: 1rem 2rem;
       font-size: 1.6rem
     }
 
     @include m.max_desktop {
-      @include m.button_input(v.$mandarin, v.$white, "inline-block");
+      @include m.button_input(v.$xblue, v.$white, "inline-block");
     }
   }
 
