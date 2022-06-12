@@ -21,7 +21,7 @@
   }
 
   &.succes {
-    color: v.$green;
+    color: darken(v.$green, 10);
     border-left: .2rem solid v.$green;
 
     &:hover {

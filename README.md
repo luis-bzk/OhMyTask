@@ -50,3 +50,12 @@ Uptask php, js, scss, sql
 - change palette colors
 - add tasks in porject section
 - styles for task in tasks.scss
+
+## global variables
+
+- Create file with variables
+  - let tasks -> set tasks in browser,
+    - when saves in "addNew Task" -> newTask.js
+    - shows complete tasks, getTasks set tasks from url, show tasks with "showTasks" -> projectTasks.js
+  - function cleanTasksHTML -> functions.js
+    - clear previous tasks in DOM

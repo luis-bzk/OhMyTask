@@ -1,0 +1,261 @@
+(function () {
+  // === === === VARIABLES === === ===
+
+  // button show modal in "add new task"
+  const addNewTaskButton = document.querySelector("#add-task");
+  // tasks
+  let tasks = [];
+
+  //  === === === FUNCTIONS === === ===
+  //  get project URL
+  const getProjectUrl = () => {
+    const paramProject = new URLSearchParams(window.location.search);
+    const project = Object.fromEntries(paramProject.entries());
+    return project.id;
+  };
+
+  //  === === === ACTIONS === === ===
+
+  //  === === === save tasks
+  // show alert on IU
+  const showAlert = (message, type, reference) => {
+    // prevent more > 1 alert
+    const existAlert = document.querySelector(".alert");
+
+    if (existAlert) {
+      existAlert.remove();
+    }
+
+    //create element
+    const newAlert = document.createElement("DIV");
+    newAlert.classList.add("alert", type);
+
+    // add text
+    if (type === "error") {
+      newAlert.innerHTML = `${message} <i class="fa-solid fa-triangle-exclamation"></i>
+      `;
+    } else {
+      newAlert.textContent = message;
+    }
+
+    // insert alert in document
+    reference.parentElement.insertBefore(newAlert, reference.nextElementSibling);
+
+    // delete alert
+    setTimeout(() => {
+      newAlert.remove();
+    }, 5000);
+  };
+
+  // consult Server and add new task to project
+  const addNewTask = async function (task) {
+    const documentReference = document.querySelector(".form-task legend");
+    const data = new FormData();
+
+    data.append("name", task);
+    data.append("project_id", getProjectUrl());
+
+    try {
+      const url = "http://localhost:3000/api/task";
+
+      const answer = await fetch(url, {
+        method: "POST",
+        body: data,
+      });
+
+      const result = await answer.json();
+
+      // show alert
+      showAlert(result.message, result.type, documentReference);
+
+      // close modal
+      if (result.type === "succes") {
+        const modal = document.querySelector(".modal");
+        const formTask = document.querySelector(".form-task");
+
+        setTimeout(() => {
+          formTask.classList.add("close");
+          setTimeout(() => {
+            modal.remove();
+          }, 500);
+        }, 3000);
+
+        // task object
+        const taskObj = {
+          id: String(result.id),
+          name: task,
+          state: "0",
+          project_id: result.project_id,
+        };
+
+        tasks = [...tasks, taskObj];
+
+        console.log(taskObj);
+        console.log("desde newTask ", tasks);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // submit task form
+  const submitNewTaskForm = () => {
+    const newTask = document.querySelector("#taskName").value.trim();
+    const documentReference = document.querySelector(".form-task legend");
+
+    // validation
+    if (!newTask) {
+      // show alert
+      showAlert("You need to set a Task Name", "error", documentReference);
+      return;
+    }
+    if (newTask.length > 60) {
+      showAlert(
+        "The task name cannot be greater that 60 characters",
+        "error",
+        documentReference
+      );
+      return;
+    }
+
+    addNewTask(newTask);
+  };
+
+  // Show the modal && functions
+  const showTaskForm = () => {
+    const modal = document.createElement("DIV");
+    modal.classList.add("modal");
+
+    // add inner html -> so use  delegation
+    modal.innerHTML = `
+    <form class="form-task container-md">
+      <legend>Add new task</legend>
+
+      <div class="field">
+        <label for="taskName">Task Name</label>
+        <input type="text" id="taskName" name="taskName" value="" />
+      </div>
+
+      <div class="field form-task__buttons">
+        <input type="submit" class="button-new-task" value="Add task" />
+        <button type="button" class="close-modal">
+          Cancel
+        </button>
+      </div>
+    </form>
+    `;
+
+    // add animation to form when appear
+    setTimeout(() => {
+      const formTask = document.querySelector(".form-task");
+      formTask.classList.add("animation");
+    }, 100);
+
+    // close modal
+    modal.addEventListener("click", function (event) {
+      event.preventDefault();
+
+      // remove model && transition || Delegation
+      if (event.target.classList.contains("close-modal")) {
+        const formTask = document.querySelector(".form-task");
+        formTask.classList.add("close");
+
+        setTimeout(() => {
+          modal.remove();
+        }, 500);
+      }
+
+      //  add new task button
+      if (event.target.classList.contains("button-new-task")) {
+        submitNewTaskForm();
+      }
+    });
+
+    // add modal to body
+    document.querySelector(".dashboard").appendChild(modal);
+  };
+
+
+  // === === === show tasks
+  const showTasks = () => {
+    // not tasks
+    if (tasks.length === 0) {
+      const tasksList = document.querySelector("#tasks-list");
+
+      const notTasks = document.createElement("DIV");
+      notTasks.textContent = "There aren't tasks";
+      notTasks.classList.add("not-tasks");
+
+      tasksList.appendChild(notTasks);
+      return;
+    }
+
+    // state dictionary
+    const stateTask = {
+      0: "Pending",
+      1: "Complete",
+    };
+
+    // create element layer
+    tasks.forEach((task) => {
+      const tasksList = document.querySelector("#tasks-list");
+
+      // task container
+      const taskContainer = document.createElement("LI");
+      taskContainer.classList.add("task");
+      taskContainer.dataset.taskId = task.id;
+
+      // name
+      const taskName = document.createElement("P");
+      taskName.textContent = task.name;
+      taskName.classList.add("task__name");
+
+      // options
+      const taskOptions = document.createElement("DIV");
+      taskOptions.classList.add("task__options");
+
+      // option buttons
+      const stateTaskButton = document.createElement("BUTTON");
+      stateTaskButton.classList.add("task-state");
+      stateTaskButton.classList.add(`${stateTask[task.state].toLowerCase()}`);
+      stateTaskButton.textContent = stateTask[task.state];
+      stateTaskButton.dataset.taskState = task.state;
+
+      const deleteTaskButton = document.createElement("BUTTON");
+      deleteTaskButton.classList.add("task-delete");
+      deleteTaskButton.textContent = "Delete";
+      deleteTaskButton.dataset.taskDelete = task.id;
+
+      taskOptions.appendChild(stateTaskButton);
+      taskOptions.appendChild(deleteTaskButton);
+
+      taskContainer.appendChild(taskName);
+      taskContainer.appendChild(taskOptions);
+
+      tasksList.appendChild(taskContainer);
+    });
+  };
+
+  const getTasks = async function () {
+    try {
+      const projectId = getProjectUrl();
+      const urlProject = `/api/tasks?id=${projectId}`;
+      const answer = await fetch(urlProject); //send url project
+      const result = await answer.json();
+
+      // const { tasks } = result;
+      tasks = result.tasks;
+      console.log("desde projectTask ", tasks);
+
+
+      showTasks();
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  getTasks();
+
+
+  // === === === show form task in a modal === === ===
+  addNewTaskButton.addEventListener("click", showTaskForm);
+})();

@@ -1,6 +1,10 @@
-import { getProjectUrl } from "./functions.js";
+import {getProjectUrl} from "./functions.js";
 
-const showTasks = (tasks) => {
+// variables
+// export let tasks = [];
+import {tasks, setTasks} from "./globalVariables.js";
+
+export const showTasks = () => {
   // not tasks
   if (tasks.length === 0) {
     const tasksList = document.querySelector("#tasks-list");
@@ -66,9 +70,13 @@ export const getTasks = async function () {
     const answer = await fetch(urlProject); //send url project
     const result = await answer.json();
 
-    const { tasks } = result;
+    // const { tasks } = result;
+    // tasks = result.tasks;
+    setTasks(result.tasks);
+    console.log("desde projectTask ", tasks);
 
-    showTasks(tasks);
+
+    showTasks();
   } catch (e) {
     console.log(e);
   }

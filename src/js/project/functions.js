@@ -3,3 +3,11 @@ export const getProjectUrl = () => {
   const project = Object.fromEntries(paramProject.entries());
   return project.id;
 };
+
+export const cleanTasksHTML = () => {
+  const tasksList = document.querySelector("#tasks-list");
+  while (tasksList.firstChild) {
+    tasksList.removeChild(tasksList.firstChild);
+  }
+
+}

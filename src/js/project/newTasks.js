@@ -1,5 +1,9 @@
+import {getProjectUrl, cleanTasksHTML} from "./functions.js";
+// import { tasks } from "./projectTasks.js";
+import {tasks, setTasks} from "./globalVariables.js";
+// show tasks
+import {showTasks} from "./projectTasks.js"
 
-import { getProjectUrl } from "./functions.js";
 
 // show alert on IU
 const showAlert = (message, type, reference) => {
@@ -23,10 +27,7 @@ const showAlert = (message, type, reference) => {
   }
 
   // insert alert in document
-  reference.parentElement.insertBefore(
-    newAlert,
-    reference.nextElementSibling
-  );
+  reference.parentElement.insertBefore(newAlert, reference.nextElementSibling);
 
   // delete alert
   setTimeout(() => {
@@ -65,7 +66,24 @@ const addNewTask = async function (task) {
         setTimeout(() => {
           modal.remove();
         }, 500);
-      }, 3000);
+      }, 2000);
+
+      // create new task object in browser
+      const taskObj = {
+        id: String(result.id),
+        name: task,
+        state: "0",
+        project_id: result.project_id,
+      };
+
+      // saving the task object in
+      // tasks = [...tasks, taskObj];
+      setTasks([...tasks, taskObj]);
+      cleanTasksHTML();
+      showTasks();
+
+      console.log(taskObj);
+      console.log("desde newTask ", tasks);
     }
   } catch (error) {
     console.log(error);

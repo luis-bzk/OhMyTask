@@ -64,6 +64,7 @@ class TaskController
         "message" => "Task saved successfully!",
         "id" => $result["id"],
         "type" => "succes",
+        "project_id" => $project->id,
       ];
 
       echo json_encode($alertAnswer);

@@ -1,1 +1,1 @@
-export const getProjectUrl=()=>{const e=new URLSearchParams(window.location.search);return Object.fromEntries(e.entries()).id};
+export const getProjectUrl=()=>{const e=new URLSearchParams(window.location.search);return Object.fromEntries(e.entries()).id};export const cleanTasksHTML=()=>{const e=document.querySelector("#tasks-list");for(;e.firstChild;)e.removeChild(e.firstChild)};
