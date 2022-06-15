@@ -60,7 +60,7 @@ Uptask php, js, scss, sql
   - function cleanTasksHTML -> functions.js
     - clear previous tasks in DOM
 
-## Update variables
+## Create & Update & Delete Tasks
 
 - New funtions in projectTasks.js
 
@@ -73,5 +73,3 @@ Uptask php, js, scss, sql
   - create -> Create new task and return a successfully message
   - update -> Save an existing task changing data and return a successfully message
   - delete -> Delete task and return a successfully message
-
-## Delete variables
