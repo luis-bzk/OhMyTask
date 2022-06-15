@@ -1,12 +1,11 @@
-import {getProjectUrl, cleanTasksHTML} from "./functions.js";
+import { getProjectUrl, cleanTasksHTML } from "./functions.js";
 // import { tasks } from "./projectTasks.js";
-import {tasks, setTasks} from "./globalVariables.js";
+import { tasks, setTasks } from "./globalVariables.js";
 // show tasks
-import {showTasks} from "./projectTasks.js"
-
+import { showTasks } from "./projectTasks.js";
 
 // show alert on IU
-const showAlert = (message, type, reference) => {
+export const showAlert = (message, type, reference) => {
   // prevent more > 1 alert
   const existAlert = document.querySelector(".alert");
 
@@ -79,11 +78,7 @@ const addNewTask = async function (task) {
       // saving the task object in
       // tasks = [...tasks, taskObj];
       setTasks([...tasks, taskObj]);
-      cleanTasksHTML();
       showTasks();
-
-      console.log(taskObj);
-      console.log("desde newTask ", tasks);
     }
   } catch (error) {
     console.log(error);

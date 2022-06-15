@@ -59,3 +59,19 @@ Uptask php, js, scss, sql
     - shows complete tasks, getTasks set tasks from url, show tasks with "showTasks" -> projectTasks.js
   - function cleanTasksHTML -> functions.js
     - clear previous tasks in DOM
+
+## Update variables
+
+- New funtions in projectTasks.js
+
+  - changeTaskState -> take a task copy and change state to pass an updateTask function
+  - updateTask -> update a task with new state, send data with API, return new array and show task
+  - confirmDeleteTask -> delete one task and return an array without the selected task, delete in backend with API
+
+- Set new functions in TaskController.php
+  - index -> return whit API all the tasks from a Project
+  - create -> Create new task and return a successfully message
+  - update -> Save an existing task changing data and return a successfully message
+  - delete -> Delete task and return a successfully message
+
+## Delete variables

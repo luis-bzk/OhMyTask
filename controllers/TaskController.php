@@ -45,7 +45,7 @@ class TaskController
       // validation if exist project or the project was created for tha valid user
       if (!$project || $project->ownerId !== $_SESSION["id"]) {
         $alertAnswer = [
-          "message" => "Oh oh... An error occurred, we can save this task, sorry",
+          "message" => "Oh oh... An error occurred, we can't save this task, sorry",
           "type" => "error",
         ];
 
@@ -73,13 +73,42 @@ class TaskController
 
   public static function update()
   {
-    // if !session start session 
+
+    // if !session start session
     isSession();
 
     // if is auth continue
     isAuth();
 
     if ($_SERVER['REQUEST_METHOD'] === "POST") {
+      // project exists??
+      $project = Project::where("url", $_POST["project_id"]);
+
+      // validation if exist project or the project was created for tha valid user
+      if (!$project || $project->ownerId !== $_SESSION["id"]) {
+        $alertAnswer = [
+          "message" => "Oh oh... An error occurred, we can't update this task, sorry",
+          "type" => "error",
+        ];
+
+        echo json_encode($alertAnswer);
+        return;
+      }
+
+      $task = new Task($_POST);
+      $task->project_id = $project->id;
+      $result = $task->save();
+
+      if ($result) {
+        $answerUpdate = [
+          "message" => "Task updated successfully!",
+          "id" => $task->id,
+          "type" => "succes",
+          "project_id" => $project->id,
+        ];
+
+        echo json_encode(["answerUpdate" => $answerUpdate]);
+      }
     }
   }
 
@@ -92,6 +121,31 @@ class TaskController
     isAuth();
 
     if ($_SERVER['REQUEST_METHOD'] === "POST") {
+      // project exists??
+      $project = Project::where("url", $_POST["project_id"]);
+
+      // validation if exist project or the project was created for tha valid user
+      if (!$project || $project->ownerId !== $_SESSION["id"]) {
+        $alertAnswer = [
+          "message" => "Oh oh... An error occurred, we can't update this task, sorry",
+          "type" => "error",
+        ];
+
+        echo json_encode($alertAnswer);
+        return;
+      }
+
+      $task = new Task($_POST);
+
+      $result = $task->delete();
+
+      $deleteResult = [
+        "result" => $result,
+        "message" => "Task Deleted successfully",
+        "type" => "succes",
+      ];
+
+      echo json_encode(["deleteResult" => $deleteResult]);
     }
   }
 }

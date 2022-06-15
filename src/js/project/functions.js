@@ -9,5 +9,10 @@ export const cleanTasksHTML = () => {
   while (tasksList.firstChild) {
     tasksList.removeChild(tasksList.firstChild);
   }
+};
 
-}
+const validateFormData = (data) => {
+  for (let valueData of data.values()) {
+    console.log(valueData);
+  }
+};

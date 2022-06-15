@@ -1,0 +1,1 @@
+let tasks=[];const setTasks=s=>{tasks=s};export{tasks,setTasks};

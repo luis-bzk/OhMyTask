@@ -4,7 +4,7 @@
   margin-top: 1.5rem;
   padding: 1rem 1rem;
   width: 100%;
-  background-color: none;
+  background-color: transparent;
   font-size: 1.4rem;
   font-weight: 300;
   transition: .2s;
@@ -25,7 +25,7 @@
     border-left: .2rem solid v.$green;
 
     &:hover {
-      background-color: lighten($color: v.$green, $amount: 46%);
+      background-color: lighten($color: v.$green, $amount: 40%);
       border-left: .5rem solid v.$green;
     }
   }
@@ -34,4 +34,44 @@
     cursor: pointer;
     transform: translateX(1.2rem);
   }
+}
+
+.sweetalert {
+
+  &.text {
+    font-size: 1.8rem;
+  }
+
+  &.actions {
+    width: 28rem;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  &.btn-success,
+  &.btn-danger {
+    padding: 1rem;
+    font-size: 1.6rem;
+    border: none;
+    border-radius: .5rem;
+    color: v.$white;
+    transition: .3s;
+  }
+
+  &.btn-success {
+    background-color: v.$pacificBlue;
+
+    &:hover {
+      background-color: darken(v.$pacificBlue, 10);
+    }
+  }
+
+  &.btn-danger {
+    background-color: v.$red;
+
+    &:hover {
+      background-color: darken(v.$red, 10);
+    }
+  }
+
 }

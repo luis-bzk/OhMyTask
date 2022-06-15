@@ -1,6 +1,6 @@
 // (const task = () => {})
-import {getTasks} from "./project/projectTasks.js";
-import {showTaskForm} from "./project/newTasks.js";
+import { getTasks } from "./project/projectTasks.js";
+import { showTaskForm } from "./project/newTasks.js";
 
 (function () {
   // button show modal in "add new task"
