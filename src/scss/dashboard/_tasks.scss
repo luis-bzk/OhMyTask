@@ -63,12 +63,15 @@
     border-radius: 1rem;
     padding: .5rem 1rem;
     color: v.$black;
-    // transition-property: background-color, transform;
-    // transition-duration: .2s;
+  }
+
+  &-edit {
+    font-size: 2rem;
+    color: v.$xgrayC;
     transition: .2s;
 
     &:hover {
-      transform: scale(0.95);
+      color: v.$xblue;
     }
   }
 

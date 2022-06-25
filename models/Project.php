@@ -6,7 +6,7 @@ class Project extends ActiveRecord
 {
   // variables
   protected static $table = "projects";
-  protected static $columnsDB = ["id", "name", "url", "ownerId"];
+  protected static $columnsDB = ["id", "name", "url", "owner_id"];
 
   // construct
   public function __construct($args = [])
@@ -14,7 +14,7 @@ class Project extends ActiveRecord
     $this->id = $args["id"] ?? null;
     $this->name = $args["name"] ?? '';
     $this->url = $args["url"] ?? '';
-    $this->ownerId = $args["ownerId"] ?? null;
+    $this->owner_id = $args["owner_id"] ?? null;
   }
 
   // validation

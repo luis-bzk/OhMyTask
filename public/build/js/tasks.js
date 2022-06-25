@@ -1,1 +1,1 @@
-import{getTasks}from"./project/projectTasks.js";import{showTaskForm}from"./project/newTasks.js";!function(){const s=document.querySelector("#add-task");getTasks(),s.addEventListener("click",showTaskForm)}();
+import{getTasks}from"./project/projectTasks.js";import{showTaskForm}from"./project/newTasks.js";!function(){const s=document.querySelector("#add-task");getTasks(),s.addEventListener("click",(function(){showTaskForm()}))}();

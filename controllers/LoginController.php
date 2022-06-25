@@ -144,7 +144,7 @@ class LoginController
       User::setAlert("error", "Invalid token");
     } else {
       // confirm account
-      User::setAlert("succes", "Your account was confirmed!");
+      User::setAlert("success", "Your account was confirmed!");
       $user->confirmed = 1;
       $user->token = '';
       unset($user->password2);
@@ -192,7 +192,7 @@ class LoginController
           $email->sendInstructions();
 
           // print alert
-          User::setAlert("succes", "We have sent instructions to your email");
+          User::setAlert("success", "We have sent instructions to your email");
         } else {
           User::setAlert("error", "Invalid email or user not confirmed");
         }

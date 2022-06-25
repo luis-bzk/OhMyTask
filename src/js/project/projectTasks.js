@@ -1,13 +1,13 @@
 import { getProjectUrl, cleanTasksHTML } from "./functions.js";
-import { showAlert } from "./newTasks.js";
+import { showAlert, showTaskForm } from "./newTasks.js";
 
 // variables
 // export let tasks = [];
 import { tasks, setTasks } from "./globalVariables.js";
 
 // update a task with new state, API, return new array and show task
-const updateTask = async function (topUpdateTask) {
-  const { id, name, state } = topUpdateTask;
+export const updateTask = async function (toUpdateTask) {
+  const { id, name, state } = toUpdateTask;
 
   const data = new FormData();
   data.append("id", id);
@@ -25,15 +25,27 @@ const updateTask = async function (topUpdateTask) {
 
     const result = await answer.json();
 
-    if (result.answerUpdate.type === "succes") {
-      const documentReference = document.querySelector(".container-new-task");
+    if (result.answerUpdate.type === "success") {
+      // const documentReference = document.querySelector(".container-new-task");
       const { message, type } = result.answerUpdate;
 
-      showAlert(message, type, documentReference);
+      showAlert(message, type);
+
+      const modal = document.querySelector(".modal");
+      const formTask = document.querySelector(".form-task");
+      if (modal) {
+        setTimeout(() => {
+          formTask.classList.add("close");
+          setTimeout(() => {
+            modal.remove();
+          }, 500);
+        }, 1000);
+      }
 
       const updatedTasks = tasks.map((memoryTask) => {
         if (memoryTask.id === id) {
           memoryTask.state = state;
+          memoryTask.name = name;
         }
 
         return memoryTask;
@@ -48,24 +60,14 @@ const updateTask = async function (topUpdateTask) {
 };
 
 // take a task copy and change state
-const changeTaskState = (topUpdateTask) => {
-  const newTaskState = topUpdateTask.state === "1" ? "0" : "1";
-  topUpdateTask.state = newTaskState;
-  updateTask(topUpdateTask);
+const changeTaskState = (toUpdateTask) => {
+  const newTaskState = toUpdateTask.state === "1" ? "0" : "1";
+  toUpdateTask.state = newTaskState;
+  updateTask(toUpdateTask);
 };
 
 // delete one task and return an array without the selected task, API
 const confirmDeleteTask = (toDeleteTask) => {
-  const swalWithcustomButtons = Swal.mixin({
-    customClass: {
-      confirmButton: "sweetalert btn-success",
-      cancelButton: "sweetalert btn-danger",
-      title: "sweetalert text",
-      actions: "sweetalert actions",
-    },
-    buttonsStyling: false,
-  });
-
   const deleteTaskProject = async function (toDeleteTask) {
     const { id, name, state } = toDeleteTask;
 
@@ -83,10 +85,10 @@ const confirmDeleteTask = (toDeleteTask) => {
       });
       const deleteResult = await answer.json();
       const { result, message, type } = deleteResult.deleteResult;
-      const documentReference = document.querySelector(".container-new-task");
+      // const documentReference = document.querySelector(".container-new-task");
 
       if (result) {
-        showAlert(message, type, documentReference);
+        showAlert(message, type);
         setTasks(
           tasks.filter((memoryTask) => memoryTask.id !== toDeleteTask.id)
         );
@@ -96,6 +98,16 @@ const confirmDeleteTask = (toDeleteTask) => {
       console.log(error);
     }
   };
+
+  const swalWithcustomButtons = Swal.mixin({
+    customClass: {
+      confirmButton: "sweetalert btn-success",
+      cancelButton: "sweetalert btn-danger",
+      title: "sweetalert text",
+      actions: "sweetalert actions",
+    },
+    buttonsStyling: false,
+  });
 
   // ALERT
   swalWithcustomButtons
@@ -111,12 +123,6 @@ const confirmDeleteTask = (toDeleteTask) => {
     .then((result) => {
       if (result.isConfirmed) {
         deleteTaskProject(toDeleteTask);
-
-        // swalWithcustomButtons.fire(
-        //   "Your task has been deleted!",
-        //   "",
-        //   "success"
-        // );
       }
     });
 };
@@ -161,6 +167,15 @@ export const showTasks = () => {
     taskOptions.classList.add("task__options");
 
     // option buttons
+    //edit
+    const editTaskButton = document.createElement("I");
+    editTaskButton.classList.add("fa-solid");
+    editTaskButton.classList.add("fa-pen-to-square");
+    editTaskButton.classList.add("task-edit");
+    editTaskButton.ondblclick = function () {
+      showTaskForm(true, { ...task });
+    };
+    //state
     const stateTaskButton = document.createElement("BUTTON");
     stateTaskButton.classList.add("task-state");
     stateTaskButton.classList.add(`${stateTask[task.state].toLowerCase()}`);
@@ -170,7 +185,7 @@ export const showTasks = () => {
     stateTaskButton.ondblclick = function () {
       changeTaskState({ ...task });
     };
-
+    //delete
     const deleteTaskButton = document.createElement("BUTTON");
     deleteTaskButton.classList.add("task-delete");
     deleteTaskButton.textContent = "Delete";
@@ -180,6 +195,7 @@ export const showTasks = () => {
       confirmDeleteTask({ ...task });
     };
 
+    taskOptions.appendChild(editTaskButton);
     taskOptions.appendChild(stateTaskButton);
     taskOptions.appendChild(deleteTaskButton);
 

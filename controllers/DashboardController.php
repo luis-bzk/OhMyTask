@@ -21,7 +21,7 @@ class DashboardController
 
     // projects
     $userId = $_SESSION["id"];
-    $projects = Project::belongsTo("ownerId", $userId);
+    $projects = Project::belongsTo("owner_id", $userId);
 
     // show view
     $router->render("dashboard/index", [
@@ -55,7 +55,7 @@ class DashboardController
         $project->createUrl();
 
         // save project with owner id
-        $project->ownerId = $_SESSION['id'];
+        $project->owner_id = $_SESSION['id'];
 
         // save the project
         $project->save();
@@ -96,7 +96,7 @@ class DashboardController
     }
 
     // owner project validation
-    if ($project->ownerId !== $_SESSION["id"]) {
+    if ($project->owner_id !== $_SESSION["id"]) {
       header('Location: /dashboard');
     }
 

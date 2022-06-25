@@ -43,14 +43,14 @@ class User extends ActiveRecord
     if ($this->name === '') {
       self::$alerts["error"][] = "A user name is required";
     }
-    if (strlen($this->name) > 45) {
+    if (strlen($this->name) > 60) {
       self::$alerts["error"][] = "The user name is to long";
     }
     if ($this->email === '') {
       self::$alerts["error"][] = "A user email is required";
     }
-    if (strlen($this->email) > 45) {
-      self::$alerts["error"][] = "A user email is required";
+    if (strlen($this->email) > 60) {
+      self::$alerts["error"][] = "The email is so long";
     }
     // invalid email structure
     if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
@@ -78,7 +78,7 @@ class User extends ActiveRecord
   // generate token 
   public function createToken()
   {
-    $this->token = uniqid();
+    $this->token = md5(uniqid());
   }
 
   // email validation to reset password

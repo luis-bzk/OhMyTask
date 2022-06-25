@@ -24,7 +24,7 @@ class TaskController
     // find project
     $project = Project::where("url", $projectUrl);
 
-    if (!$project || $project->ownerId !== $_SESSION["id"]) {
+    if (!$project || $project->owner_id !== $_SESSION["id"]) {
       header("Location: /404");
     }
 
@@ -43,7 +43,7 @@ class TaskController
       $project = Project::where("url", $projectUrl);
 
       // validation if exist project or the project was created for tha valid user
-      if (!$project || $project->ownerId !== $_SESSION["id"]) {
+      if (!$project || $project->owner_id !== $_SESSION["id"]) {
         $alertAnswer = [
           "message" => "Oh oh... An error occurred, we can't save this task, sorry",
           "type" => "error",
@@ -63,7 +63,7 @@ class TaskController
       $alertAnswer = [
         "message" => "Task saved successfully!",
         "id" => $result["id"],
-        "type" => "succes",
+        "type" => "success",
         "project_id" => $project->id,
       ];
 
@@ -85,7 +85,7 @@ class TaskController
       $project = Project::where("url", $_POST["project_id"]);
 
       // validation if exist project or the project was created for tha valid user
-      if (!$project || $project->ownerId !== $_SESSION["id"]) {
+      if (!$project || $project->owner_id !== $_SESSION["id"]) {
         $alertAnswer = [
           "message" => "Oh oh... An error occurred, we can't update this task, sorry",
           "type" => "error",
@@ -103,7 +103,7 @@ class TaskController
         $answerUpdate = [
           "message" => "Task updated successfully!",
           "id" => $task->id,
-          "type" => "succes",
+          "type" => "success",
           "project_id" => $project->id,
         ];
 
@@ -125,7 +125,7 @@ class TaskController
       $project = Project::where("url", $_POST["project_id"]);
 
       // validation if exist project or the project was created for tha valid user
-      if (!$project || $project->ownerId !== $_SESSION["id"]) {
+      if (!$project || $project->owner_id !== $_SESSION["id"]) {
         $alertAnswer = [
           "message" => "Oh oh... An error occurred, we can't update this task, sorry",
           "type" => "error",
@@ -142,7 +142,7 @@ class TaskController
       $deleteResult = [
         "result" => $result,
         "message" => "Task Deleted successfully",
-        "type" => "succes",
+        "type" => "success",
       ];
 
       echo json_encode(["deleteResult" => $deleteResult]);

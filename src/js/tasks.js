@@ -11,5 +11,7 @@ import { showTaskForm } from "./project/newTasks.js";
   getTasks();
 
   // show form task in a modal
-  addNewTaskButton.addEventListener("click", showTaskForm);
+  addNewTaskButton.addEventListener("click", function () {
+    showTaskForm();
+  });
 })();

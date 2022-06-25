@@ -2,44 +2,27 @@ import { getProjectUrl, cleanTasksHTML } from "./functions.js";
 // import { tasks } from "./projectTasks.js";
 import { tasks, setTasks } from "./globalVariables.js";
 // show tasks
-import { showTasks } from "./projectTasks.js";
+import { showTasks, updateTask } from "./projectTasks.js";
 
 // show alert on IU
-export const showAlert = (message, type, reference) => {
-  // prevent more > 1 alert
-  const existAlert = document.querySelector(".alert");
-
-  if (existAlert) {
-    existAlert.remove();
-  }
-
-  //create element
-  const newAlert = document.createElement("DIV");
-  newAlert.classList.add("alert", type);
-
-  // add text
-  if (type === "error") {
-    newAlert.innerHTML = `${message} <i class="fa-solid fa-triangle-exclamation"></i>
-      `;
-  } else {
-    newAlert.textContent = message;
-  }
-
-  // insert alert in document
-  reference.parentElement.insertBefore(newAlert, reference.nextElementSibling);
-
-  // delete alert
-  setTimeout(() => {
-    newAlert.remove();
-  }, 5000);
+export const showAlert = (message, type) => {
+  // ALERT
+  const SwalAlertDB = Swal.mixin({
+    customClass: {
+      title: "sweetalert title",
+      confirmButton: "sweetalert btn-success",
+    },
+    buttonsStyling: false,
+  });
+  SwalAlertDB.fire({ title: message, icon: type, width: 600 });
 };
 
 // consult Server and add new task to project
-const addNewTask = async function (task) {
-  const documentReference = document.querySelector(".form-task legend");
+const addNewTask = async function (newTaskName) {
+  // const documentReference = document.querySelector(".form-task legend");
   const data = new FormData();
 
-  data.append("name", task);
+  data.append("name", newTaskName);
   data.append("project_id", getProjectUrl());
 
   try {
@@ -53,10 +36,10 @@ const addNewTask = async function (task) {
     const result = await answer.json();
 
     // show alert
-    showAlert(result.message, result.type, documentReference);
+    showAlert(result.message, result.type);
 
     // close modal
-    if (result.type === "succes") {
+    if (result.type === "success") {
       const modal = document.querySelector(".modal");
       const formTask = document.querySelector(".form-task");
 
@@ -65,12 +48,12 @@ const addNewTask = async function (task) {
         setTimeout(() => {
           modal.remove();
         }, 500);
-      }, 2000);
+      }, 1000);
 
       // create new task object in browser
       const taskObj = {
         id: String(result.id),
-        name: task,
+        name: newTaskName,
         state: "0",
         project_id: result.project_id,
       };
@@ -85,46 +68,57 @@ const addNewTask = async function (task) {
   }
 };
 
-// submit task form
-const submitNewTaskForm = () => {
-  const newTask = document.querySelector("#taskName").value.trim();
-  const documentReference = document.querySelector(".form-task legend");
+// validation task
+const setTaskValidation = (editTask, toUpdateTask) => {
+  const newTaskName = document.querySelector("#taskName").value.trim();
+  // const documentReference = document.querySelector(".form-task legend");
 
   // validation
-  if (!newTask) {
+  if (!newTaskName) {
     // show alert
-    showAlert("You need to set a Task Name", "error", documentReference);
+    showAlert("You need to set a Task Name", "error");
     return;
   }
-  if (newTask.length > 60) {
-    showAlert(
-      "The task name cannot be greater that 60 characters",
-      "error",
-      documentReference
-    );
+  if (newTaskName.length > 60) {
+    showAlert("The task name cannot be greater that 60 characters", "error");
     return;
   }
 
-  addNewTask(newTask);
+  // update task
+  if (editTask) {
+    toUpdateTask.name = newTaskName;
+    updateTask(toUpdateTask);
+  }
+  // new task
+  if (editTask === false) {
+    addNewTask(newTaskName);
+  }
 };
 
 // Show the modal && functions
-export const showTaskForm = () => {
+export const showTaskForm = (editTask = false, toUpdateTask = {}) => {
+  // console.log(editTask);
+  // console.log(toUpdateTask);
+
   const modal = document.createElement("DIV");
   modal.classList.add("modal");
 
   // add inner html -> so use  delegation
   modal.innerHTML = `
     <form class="form-task container-md">
-      <legend>Add new task</legend>
+      <legend>${editTask ? "Edit task" : "Add new task"}</legend>
 
       <div class="field">
         <label for="taskName">Task Name</label>
-        <input type="text" id="taskName" name="taskName" value="" />
+        <input type="text" id="taskName" name="taskName" value="${
+          toUpdateTask.name ? toUpdateTask.name : ""
+        }" />
       </div>
 
       <div class="field form-task__buttons">
-        <input type="submit" class="button-new-task" value="Add task" />
+        <input type="submit" class="button-new-task" value="${
+          toUpdateTask.name ? "Save Changes" : "Add New Task"
+        }" />
         <button type="button" class="close-modal">
           Cancel
         </button>
@@ -152,9 +146,9 @@ export const showTaskForm = () => {
       }, 500);
     }
 
-    //  add new task button
+    //  add new task by button class
     if (event.target.classList.contains("button-new-task")) {
-      submitNewTaskForm();
+      setTaskValidation(editTask, toUpdateTask);
     }
   });
 

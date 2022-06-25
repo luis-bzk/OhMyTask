@@ -2,7 +2,7 @@
 
 function conectDB(): mysqli
 {
-  $db = new mysqli('localhost', 'root', '0105392435', 'ohmytask');
+  $db = new mysqli('localhost', 'root', '', 'ohmytask');
   // location, user, password, nameDB
 
   if (!$db) {
