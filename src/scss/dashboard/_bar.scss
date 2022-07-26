@@ -1,16 +1,53 @@
 @use "../base/variables"as v;
 @use "../base/mixins"as m;
 
-.bar {
+.bar-mobile {
+  background-color: v.$xblue;
+  padding: 1rem;
   display: flex;
-  margin: 1rem;
-  padding: 1rem;
-  // border-radius: .5rem;
-  // background-color: v.$white;
-  padding: 1rem;
-  align-items: center;
+  flex-direction: row;
   justify-content: space-between;
-  border-bottom: 1px solid v.$xgrayA;
+  align-items: center;
+
+  h1 {
+    color: v.$white;
+  }
+
+  @include m.min_tablet {
+    display: none;
+  }
+
+  .menu {
+    img {
+      width: 4rem;
+      height: 4rem;
+    }
+
+    transition: .1s;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:active {
+      transform: scale(0.9);
+    }
+  }
+}
+
+.bar {
+  display: none;
+
+
+  @include m.min_tablet {
+    display: flex;
+    margin: 1rem;
+    padding: 1rem;
+    padding: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid v.$xgrayA;
+  }
 
   p {
     span {

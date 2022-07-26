@@ -1,9 +1,11 @@
 import { getProjectUrl, cleanTasksHTML } from "./functions.js";
 import { showAlert, showTaskForm } from "./newTasks.js";
-
-// variables
-// export let tasks = [];
-import { tasks, setTasks } from "./globalVariables.js";
+import {
+  tasks,
+  setTasks,
+  filteredTasks,
+  setFilteredTasks,
+} from "./globalVariables.js";
 
 // update a task with new state, API, return new array and show task
 export const updateTask = async function (toUpdateTask) {
@@ -127,11 +129,37 @@ const confirmDeleteTask = (toDeleteTask) => {
     });
 };
 
+const totalPending = () => {
+  const totalTasksPending = tasks.filter((task) => task.state === "0");
+  const pendingRatio = document.querySelector("#pendings");
+
+  if (totalTasksPending.length === 0) {
+    pendingRatio.disabled = true;
+  } else {
+    pendingRatio.disabled = false;
+  }
+};
+const totalComplete = () => {
+  const totalComplete = tasks.filter((task) => task.state === "1");
+  const completeRadio = document.querySelector("#complete");
+
+  if (totalComplete.length === 0) {
+    completeRadio.disabled = true;
+  } else {
+    completeRadio.disabled = false;
+  }
+};
+
 export const showTasks = () => {
   cleanTasksHTML();
 
+  totalPending();
+  totalComplete();
+
+  const arrayTasks = filteredTasks.length ? filteredTasks : tasks;
+
   // not tasks
-  if (tasks.length === 0) {
+  if (arrayTasks.length === 0) {
     const tasksList = document.querySelector("#tasks-list");
 
     const notTasks = document.createElement("DIV");
@@ -149,7 +177,7 @@ export const showTasks = () => {
   };
 
   // create element layer
-  tasks.forEach((task) => {
+  arrayTasks.forEach((task) => {
     const tasksList = document.querySelector("#tasks-list");
 
     // task container
@@ -206,6 +234,25 @@ export const showTasks = () => {
   });
 };
 
+// filter
+const filterSearch = document.querySelectorAll("#filters input[type='radio']");
+
+const filterTasks = (event) => {
+  const filter = event.target.value;
+  if (filter !== "") {
+    setFilteredTasks(tasks.filter((task) => task.state === filter));
+  } else {
+    setFilteredTasks([]);
+  }
+
+  showTasks();
+};
+
+filterSearch.forEach((radio) => {
+  radio.addEventListener("input", filterTasks);
+});
+
+// get tasks
 export const getTasks = async function () {
   try {
     const projectId = getProjectUrl();

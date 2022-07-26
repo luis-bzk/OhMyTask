@@ -4,4 +4,10 @@ const setTasks = (tasksValues) => {
   tasks = tasksValues;
 };
 
-export { tasks, setTasks };
+let filteredTasks = [];
+
+const setFilteredTasks = (filterTasksValues) => {
+  filteredTasks = filterTasksValues;
+};
+
+export { tasks, setTasks, filteredTasks, setFilteredTasks };
