@@ -1,0 +1,82 @@
+@use "../base/variables" as v;
+
+@media (prefers-color-scheme: dark) {
+  $darkGrayMode: #2f323b;
+
+  body {
+    background-color: $darkGrayMode;
+    color: v.$white;
+  }
+
+  .dashboard {
+    background-color: $darkGrayMode;
+    color: v.$white;
+
+    .sidebar {
+      background-color: $darkGrayMode;
+
+      .sidebar-nav {
+        a {
+          color: v.$white;
+          &:hover {
+            background-color: v.$xblue;
+          }
+        }
+        .active {
+          background-color: v.$xblue;
+        }
+      }
+    }
+
+    form {
+      background-color: v.$spaceCadet;
+      .field {
+        input:not([type="submit"]) {
+          color: v.$white;
+          &:hover {
+            border: 1px solid v.$blue;
+          }
+        }
+      }
+    }
+
+    .form-task {
+      background-color: v.$spaceCadet;
+      .field {
+        input:not([type="submit"]) {
+          color: v.$white;
+          &:hover {
+            border: 1px solid v.$blue;
+          }
+        }
+      }
+    }
+
+    .project {
+      background-color: v.$spaceCadet;
+      a {
+        color: v.$white;
+      }
+    }
+  }
+
+  .header-auth {
+    background-color: $darkGrayMode;
+  }
+
+  .auth-box {
+    background-color: $darkGrayMode;
+
+    form {
+      background-color: $darkGrayMode;
+      .field {
+        input:not([type="submit"]) {
+          color: v.$white;
+          &:hover {
+            border-bottom: 1px solid v.$blue;
+          }
+        }
+      }
+    }
+  }
+}

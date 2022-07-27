@@ -44,6 +44,7 @@ $router->get("/create-project", [DashboardController::class, "createProject"]);
 $router->post("/create-project", [DashboardController::class, "createProject"]);
 $router->get("/project", [DashboardController::class, "project"]);
 $router->get("/profile", [DashboardController::class, "profile"]);
+$router->post("/profile", [DashboardController::class, "profile"]);
 
 // FETCH API
 $router->get("/api/tasks", [TaskController::class, "index"]);

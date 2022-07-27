@@ -14,6 +14,12 @@ class LoginController
   {
     // variables
     $alerts = [];
+    if($_SESSION){
+
+      if ($_SESSION["login"]){
+        header('Location: /dashboard');
+      }
+    }
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
       // set variables

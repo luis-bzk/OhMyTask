@@ -1,0 +1,54 @@
+@use "../base/variables" as v;
+@use "../base/mixins" as m;
+
+.form-update-profile {
+  margin-top: 3rem;
+  padding: 2rem 3rem;
+  border-radius: 5px;
+  background-color: v.$white;
+
+  .field {
+    display: flex;
+    flex-direction: row;
+    // justify-content: center;
+    align-items: center;
+    margin-bottom: 3rem;
+
+    label {
+      width: 15rem;
+    }
+
+    input:not([type="submit"]) {
+      flex: 1;
+      background-color: transparent;
+      font-weight: 300;
+      border-radius: 5px;
+      border: 1px solid v.$white;
+      color: lighten($color: v.$black, $amount: 20%);
+      padding: 1rem;
+      outline: none;
+      border: 0.1rem solid v.$gray;
+      transition: 0.3s;
+
+      &:hover {
+        border: 1px solid v.$black;
+      }
+    }
+  }
+
+  .update-profile-button {
+    display: block;
+    border: none;
+    border-radius: 5px;
+    padding: 1rem 2rem;
+    background-color: v.$pacificBlue;
+    color: v.$white;
+    font-weight: 500;
+    transition: 0.2s;
+
+    &:hover {
+      background-color: darken(v.$pacificBlue, 10%);
+      cursor: pointer;
+    }
+  }
+}

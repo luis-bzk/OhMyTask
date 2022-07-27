@@ -1,5 +1,5 @@
-@use "../base/variables"as v;
-@use "../base/mixins"as m;
+@use "../base/variables" as v;
+@use "../base/mixins" as m;
 
 .form {
   margin-top: 3rem;
@@ -14,16 +14,15 @@
       background-color: transparent;
       font-weight: 300;
       color: lighten($color: v.$black, $amount: 20%);
-      padding: 1rem 0 .5rem 0;
+      padding: 1rem 0 0.5rem 0;
       border: none;
       outline: none;
-      border-bottom: .1rem solid v.$gray;
-      transition: .3s;
+      border-bottom: 0.1rem solid v.$gray;
+      transition: 0.3s;
 
       &:hover {
-        border-bottom: .1rem solid darken(v.$gray, 25%);
+        border-bottom: 0.1rem solid darken(v.$gray, 25%);
       }
     }
-
   }
 }

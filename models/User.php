@@ -110,4 +110,16 @@ class User extends ActiveRecord
 
     return self::$alerts;
   }
+
+  public function profile_validation()
+  {
+    if(!$this->name){
+      self::$alerts['error'][] = "Name is necessary";
+    }
+    if(!$this->email){
+      self::$alerts['error'][] = "Email is necessary";
+    }
+
+    return self::$alerts;
+  }
 }

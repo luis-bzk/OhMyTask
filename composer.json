@@ -17,6 +17,7 @@
     ],
     "require": {
       "phpmailer/phpmailer": "^6.6",
-      "ext-json": "*"
+      "ext-json": "*",
+        "vlucas/phpdotenv": "^5.4"
     }
 }

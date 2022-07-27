@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use Model\Project;
+use Model\User;
 use MVC\Router;
 
 class DashboardController
@@ -120,9 +121,41 @@ class DashboardController
     // if is auth continue
     isAuth();
 
+    $alerts = [];
+
+    $user = User::find($_SESSION['id']);
+
+    if($_SERVER['REQUEST_METHOD'] === "POST"){
+      $user->synchronize($_POST);
+
+      $alerts = $user->profile_validation();
+
+      
+      if(empty($alerts)){
+        $userExists = User::where("email", $user->email);
+  
+        if ($userExists && $userExists->id !== $user->id) {
+          User::setAlert("error", "This user is registered");
+          $alerts = $user->getAlerts();
+          
+        }else{
+          $user->save();
+          
+          User::setAlert("success", "Your data was updated successfully");
+          $alerts = $user->getAlerts();
+          
+          $_SESSION["name"] = $user->name;
+        }
+      }
+    }
+
+
+
     // show view
     $router->render("dashboard/profile", [
-      "title" => $title
+      "title" => $title,
+      "user" => $user,
+      "alerts" => $alerts
     ]);
   }
 
