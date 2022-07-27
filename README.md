@@ -125,10 +125,10 @@ Uptask php, js, scss, sql
 
 ## Mobile view
 
-<img src="PicturesDemost/mobile/signin.png" alt="Signin View"/>
-<img src="PicturesDemost/mobile/dashboard.png" alt="dashboard View"/>
-<img src="PicturesDemost/mobile/menuMobile.png" alt="menuMobile option"/>
-<img src="PicturesDemost/mobile/projectFile.png" alt="project File View"/>
-<img src="PicturesDemost/mobile/addTask.png" alt="add Task modal"/>
-<img src="PicturesDemost/mobile/taskFunction.png" alt="task Functions View"/>
-<img src="PicturesDemost/mobile/createProject.png" alt="create Project.png View"/>
+<img src="PicturesDemost/mobile/signin.png" alt="Signin View" width="300"/>
+<img src="PicturesDemost/mobile/dashboard.png" alt="dashboard View" width="300"/>
+<img src="PicturesDemost/mobile/menuMobile.png" alt="menuMobile option" width="300"/>
+<img src="PicturesDemost/mobile/projectFile.png" alt="project File View" width="300"/>
+<img src="PicturesDemost/mobile/addTask.png" alt="add Task modal" width="300"/>
+<img src="PicturesDemost/mobile/taskFunction.png" alt="task Functions View" width="300"/>
+<img src="PicturesDemost/mobile/createProject.png" alt="create Project.png View" width="300" />
